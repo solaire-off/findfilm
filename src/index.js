@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Component: React.createElement
-let titleEL = React.createElement("h1", null, "Hello colleague");
+const titleEL = React.createElement("h1", null, "Hello colleague");
 
 // Component React.Component
 class HeaderText extends React.Component {
@@ -19,7 +19,7 @@ class BodyText extends React.PureComponent {
 }
 
 // Functional component
-let FooterText = () => <p>Let's keep in touch</p>;
+const FooterText = () => <p>Let's keep in touch</p>;
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
