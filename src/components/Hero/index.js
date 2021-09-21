@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Hero.sass'
 
@@ -27,6 +28,11 @@ const Hero = ({ children, title }) => {
             </div>
         </div>
     )
+}
+
+Hero.propTypes = {
+    title: PropTypes.string.isRequired,
+    children: PropTypes.element
 }
 
 export default Hero;

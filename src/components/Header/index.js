@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Header.sass'
 
@@ -18,6 +19,10 @@ const Header = ({ children, title }) => {
             </header>
         </>
     )
+}
+
+Header.propTypes = {
+    title: PropTypes.array.isRequired
 }
 
 export default Header;

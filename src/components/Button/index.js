@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './Button.sass'
 
 const STYLES = [
@@ -29,6 +31,15 @@ const Button = (
             {children}
         </button>
     )
+}
+
+Button.propTypes = {
+    children: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    buttonStyle: PropTypes.string,
+    buttonSize: PropTypes.string,
+    additionalClass: PropTypes.string
 }
 
 export default Button;

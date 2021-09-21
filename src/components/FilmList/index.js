@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import FilmItem from "../FilmItem";
 
 const FilmList = ({ list }) => {
@@ -17,6 +18,11 @@ const FilmList = ({ list }) => {
             </div>
         )
     }
+}
+
+
+FilmList.propTypes = {
+    list: PropTypes.array
 }
 
 export default FilmList;

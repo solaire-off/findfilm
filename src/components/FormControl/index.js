@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 
 import "./FormControl.sass"
 
@@ -23,6 +24,14 @@ const FormControl = ({
         )
     }
     return <textarea className={formControlClassName} placeholder={placeholder}>{children}</textarea>
+}
+
+FormControl.propTypes = {
+    children: PropTypes.string,
+    type: PropTypes.string,
+    formControlStyle: PropTypes.string,
+    placeholder: PropTypes.string,
+    additionalClass: PropTypes.string
 }
 
 export default FormControl

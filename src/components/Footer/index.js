@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Footer.sass'
 
@@ -11,6 +12,10 @@ const Footer = ({ title }) => {
             </p>
         </footer>
     )
+}
+
+Footer.propTypes = {
+    title: PropTypes.array.isRequired
 }
 
 export default Footer

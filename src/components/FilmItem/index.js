@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import "./FilmItem.sass"
+
 import filmCardPlaceholder from './../../assets/images/placeholder_320x455_ffffff_cccccc.jpg'
 
 const FilmItem = ({ title, genre, release_date, thumbnail }) => {
@@ -23,6 +26,13 @@ const FilmItem = ({ title, genre, release_date, thumbnail }) => {
             </div>
         </div>
     )
+}
+
+FilmItem.propTypes = {
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    release_date: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string,
 }
 
 export default FilmItem
