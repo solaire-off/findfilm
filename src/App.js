@@ -7,6 +7,7 @@ import Button from './components/Button';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import Dropdown from './components/Dropdown';
+import Tabs from './components/Tabs';
 
 import './App.sass'
 
@@ -14,6 +15,28 @@ import FilmListData from './assets/json/film-list.json'
 
 const App = () => {
     const siteName = ['netflix', 'roulette']
+    const tabsItems = [
+        {
+            name: 'All',
+            isActive: true
+        },
+        {
+            name: 'Documentary',
+            isActive: false
+        },
+        {
+            name: 'Comedy',
+            isActive: false
+        },
+        {
+            name: 'Horror',
+            isActive: false
+        },
+        {
+            name: 'Crime',
+            isActive: false
+        },
+    ]
     const sortTypes = [
         {
             name: 'release date',
@@ -41,6 +64,7 @@ const App = () => {
                 <div className="container">
                     <ErrorBoundary>
                         <div class="settings">
+                            <Tabs list={tabsItems} />
                             <Dropdown
                                 label="Sort by"
                                 options={sortTypes}
