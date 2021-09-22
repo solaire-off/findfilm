@@ -7,7 +7,7 @@ import './Tabs.sass'
 const Tabs = ({ list }) => {
     return (
         <div className="tabs-list">
-            {list.map((item, index) => <Tab name={item.name} isActive={item.isActive} />)}
+            {list.map((item, index) => <Tab key={item.name} name={item.name} isActive={item.isActive} />)}
         </div>
     )
 }

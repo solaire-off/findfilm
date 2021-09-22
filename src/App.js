@@ -60,10 +60,10 @@ const App = () => {
             <Hero title="FIND YOUR MOVIE">
                 <Search />
             </Hero>
-            <div class="main">
+            <div className="main">
                 <div className="container">
                     <ErrorBoundary>
-                        <div class="settings">
+                        <div className="settings">
                             <Tabs list={tabsItems} />
                             <Dropdown
                                 label="Sort by"

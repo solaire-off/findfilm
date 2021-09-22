@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 const Tab = ({ name, isActive }) => {
     const checkTabIsActive = isActive ? 'tabs-list__item--active' : '';
     return (
-        <button type="button" class={`tabs-list__item ${checkTabIsActive}`}>{name}</button>
+        <button type="button" className={`tabs-list__item ${checkTabIsActive}`}>{name}</button>
     )
 }
 
