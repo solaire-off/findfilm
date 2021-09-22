@@ -5,6 +5,7 @@ import Hero from './components/Hero';
 import Search from './components/Search';
 import Button from './components/Button';
 import Footer from './components/Footer';
+import ErrorBoundary from './components/ErrorBoundary';
 
 import './App.sass'
 
@@ -27,7 +28,9 @@ const App = () => {
             </Hero>
             <div class="main">
                 <div className="container">
-                    <FilmList list={FilmListData} />
+                    <ErrorBoundary>
+                        <FilmList list={FilmListData} />
+                    </ErrorBoundary>
                 </div>
             </div>
             <Footer title={siteName} />
