@@ -6,6 +6,7 @@ import Search from './components/Search';
 import Button from './components/Button';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
+import Dropdown from './components/Dropdown';
 
 import './App.sass'
 
@@ -13,6 +14,16 @@ import FilmListData from './assets/json/film-list.json'
 
 const App = () => {
     const siteName = ['netflix', 'roulette']
+    const sortTypes = [
+        {
+            name: 'release date',
+            value: 'release_date'
+        },
+        {
+            name: 'movie title',
+            value: 'title'
+        }
+    ]
     return (
         <>
             <Header title={siteName}>
@@ -28,6 +39,14 @@ const App = () => {
             </Hero>
             <div class="main">
                 <div className="container">
+                    <ErrorBoundary>
+                        <div class="settings">
+                            <Dropdown
+                                label="Sort by"
+                                options={sortTypes}
+                            />
+                        </div>
+                    </ErrorBoundary>
                     <ErrorBoundary>
                         <FilmList list={FilmListData} />
                     </ErrorBoundary>
