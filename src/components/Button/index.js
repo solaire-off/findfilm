@@ -27,7 +27,7 @@ const Button = (
     const checkButtonSize = SIZES.includes(buttonSize) ? buttonSize : '';
     const checkAdditionalClass = additionalClass ? additionalClass : ''
     return (
-        <button onClick={onClick} type={type} className={`btn ${checkButtonStyle} ${checkButtonStyle} ${checkAdditionalClass}`} >
+        <button onClick={onClick} type={type} className={`btn ${checkButtonStyle} ${checkButtonSize} ${checkAdditionalClass}`} >
             {children}
         </button>
     )
