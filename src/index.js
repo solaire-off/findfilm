@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-
-const DemoCaption = () => <h1>Welcome.</h1>
+import App from './App'
 
 ReactDOM.render(
-    <DemoCaption />,
+    <App />,
     document.getElementById('root')
 )

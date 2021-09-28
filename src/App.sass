@@ -1,0 +1,52 @@
+@import "~normalize.css/normalize.css"
+@import Variables.sass
+
+*
+    box-sizing: border-box
+
+body
+    font-family: $font
+    background: $black
+    color: $white
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+.container
+    max-width: 1120px
+    padding-left: 20px
+    padding-right: 20px
+    margin-left: auto
+    margin-right: auto
+
+.main
+    padding-top: 20px
+    border-top: 10px solid rgba($lighest-gray,0.5)
+
+.font-weight-black
+    font-weight: 900
+
+.font-weight-semibold
+    font-weight: 600
+
+.font-weight-medium
+    font-weight: 500
+
+.font-weight-light
+    font-weight: 300
+
+.row
+    display: grid
+    grid-template-columns: 1fr 1fr 1fr
+    grid-column-gap: 55px
+    grid-row-gap: 50px
+
+.settings
+    display: flex
+    justify-content: space-between
+    padding-bottom: 20px
+    border-bottom: 2px solid $gray
+    margin-bottom: 25px
+
+.notification-caption
+    margin-bottom: 30px
+    font-size: 20px

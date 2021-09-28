@@ -1,0 +1,33 @@
+@import ../../Variables.sass
+
+.tabs-list
+    display: flex
+    &__item
+        position: relative
+        font-size: 16px
+        line-height: 19.5px
+        color: $white
+        border: none
+        padding: 0
+        margin-right: 30px
+        background: none
+        text-transform: uppercase
+        cursor: pointer
+        &::after
+            content: ' '
+            display: block
+            position: absolute
+            bottom: -22px
+            left: 0
+            height: 0
+            width: 100%
+            border-bottom: 2px solid $danger
+            opacity: 0
+            transition: opacity 0.3s ease
+        &:not(.tabs-list__item--active)
+            &:hover
+                &::after
+                    opacity: 0.5
+        &--active
+            &::after
+                opacity: 1
