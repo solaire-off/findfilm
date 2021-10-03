@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 import "./Modal.sass"
 
@@ -42,4 +43,11 @@ export const Modal = ({ isDisplay, children, additionalClass, closeCallback }) =
             </div>
         </div>
     )
+}
+
+Modal.propTypes = {
+    children: PropTypes.node.isRequired,
+    isDisplay: PropTypes.bool.isRequired,
+    additionalClass: PropTypes.string,
+    closeCallback: PropTypes.func.isRequired
 }
