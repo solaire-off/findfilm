@@ -21,6 +21,17 @@ const FilmList = ({ list }) => {
         toggleDeleteModal(false)
     }
 
+    const filmCardActions = [
+        {
+            name: 'Edit',
+            callback: openEditModal,
+        },
+        {
+            name: 'Delete',
+            callback: openDeleteConfirm,
+        }
+    ]
+
     if (list) {
         const count = list.length
         return (
@@ -36,8 +47,7 @@ const FilmList = ({ list }) => {
                                 title={item.title}
                                 genre={item.genre}
                                 release_date={item.release_date}
-                                onClickEdit={openEditModal}
-                                onClickDelete={openDeleteConfirm}
+                                actions={filmCardActions}
                             />
                         </div>
                     )}
