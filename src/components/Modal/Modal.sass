@@ -2,21 +2,12 @@
 
 .modal
     position: fixed
-    left: -100vw
+    left: 0
     top: 0
     overflow-y: auto
     width: 100vw
     height: 100vh
     z-index: 25
-    opacity: 0
-    transition: opacity 0.3s ease
-    pointer-events: none
-    &--show
-        opacity: 1
-        pointer-events: auto
-        left: 0
-        .modal__content
-            transform: translateY(0)
     &__blocker
         background: $black
         opacity: 0.80
@@ -38,8 +29,6 @@
         padding: 60px
         position: relative
         z-index: 5
-        transition: transform 0.3s ease
-        transform: translateY(50px)
     &__footer
         display: flex
         justify-content: flex-end
@@ -87,3 +76,40 @@
             margin-bottom: 10px
             &:last-child
                 margin-bottom: 0
+
+@keyframes mmfadeIn
+    from
+        opacity: 0
+    to
+        opacity: 1
+
+@keyframes mmfadeOut
+    from
+        opacity: 1
+    to
+        opacity: 0
+
+@keyframes mmslideIn
+    from
+        transform: translateY(30px)
+    to
+        transform: translateY(0)
+
+@keyframes mmslideOut
+    from
+        transform: translateY(0px)
+    to
+        transform: translateY(30px)
+
+.modal
+    animation: mmfadeOut .3s ease
+    animation-fill-mode: forwards
+    .modal__content
+        animation: mmslideOut .5s ease
+        animation-fill-mode: forwards
+    &--show
+        animation: mmfadeIn .3s ease
+        animation-fill-mode: forwards
+        .modal__content
+            animation: mmslideIn .5s ease
+            animation-fill-mode: forwards
