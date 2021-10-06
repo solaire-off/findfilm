@@ -2,6 +2,7 @@
 
 .film-card
     font-weight: 500
+    position: relative
     &__thumbnail
         width: 100%
         height: 455px
@@ -35,3 +36,86 @@
         font-size: 14px
         line-height: 17px
         opacity: 0.5
+    &__menu
+        position: absolute
+        top: 16px
+        right: 14px
+        &-toggle
+            width: 36px
+            height: 36px
+            border-radius: 50%
+            color: $white
+            background: $dark
+            border: none
+            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.196596)
+            position: relative
+            opacity: 0
+            transition: opacity 0.3s ease, transform 0.3s ease
+            cursor: pointer
+            &::before
+                content: '...'
+                font-size: 34px
+                position: absolute
+                left: 50%
+                top: 50%
+                line-height: 1
+                transform: rotate(90deg) translateX(-75%) translateY(3%)
+                pointer-events: none
+        &--open
+            .film-card__menu-toggle
+                opacity: 0 !important
+                transform: translateY(-30px)
+            .film-card__actions
+                opacity: 1
+                transform: none
+                pointer-events: auto
+                z-index: 5
+    &__actions
+        display: flex
+        flex-direction: column
+        min-width: 190px
+        padding: 25px 0 12px
+        position: absolute
+        right: 0
+        top: 0
+        opacity: 0
+        transform: translateY(30px)
+        pointer-events: none
+        transition: opacity 0.3s ease, transform 0.3s ease
+        background: $black
+        box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.1), 0px 2px 10px rgba(0, 0, 0, 0.1), 0px 10px 20px rgba(0, 0, 0, 0.1), 0px 10px 50px rgba(0, 0, 0, 0.1)
+        &-toggle
+            width: 12px
+            height: 12px
+            position: absolute
+            right: 9.5px
+            top: 6.5px
+            background-color: transparent
+            border: none
+            padding: 0
+            background-image: url("../../assets/images/close.svg")
+            background-size: contain
+            background-position: center
+            transition: opacity 0.3s ease
+            &:hover,
+            &:focus
+                opacity: 0.5
+                cursor: pointer
+        &-item
+            font-size: 16px
+            line-height: 20px
+            padding: 7.5px 14px 6.5px 23px
+            border: none
+            background: transparent
+            transition: backgound 0.3s ease
+            color: $white
+            font-weight: 300
+            text-align: left
+            cursor: pointer
+            &:hover,
+            &:focus
+                background: $danger
+    &:hover
+        .film-card__menu
+            &-toggle
+                opacity: 1

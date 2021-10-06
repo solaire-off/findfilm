@@ -5,7 +5,8 @@ import './Button.sass'
 
 const STYLES = [
     "btn--primary",
-    "btn--outline-primary"
+    "btn--outline-primary",
+    "btn--outline-danger"
 ]
 
 const SIZES = [

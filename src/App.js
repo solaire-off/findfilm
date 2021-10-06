@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FilmList from './components/FilmList';
 import Header from './components/Header'
 import Hero from './components/Hero';
@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import Dropdown from './components/Dropdown';
 import Tabs from './components/Tabs';
+import { FilmModalEdit } from './components/FilmModalEdit';
 
 import './App.sass'
 
@@ -47,11 +48,20 @@ const App = () => {
             value: 'title'
         }
     ]
+
+    const [isOpenAddModal, toggleAddModal] = useState(false)
+    const openAddModal = () => {
+        toggleAddModal(true)
+    }
+    const closeAddModal = () => {
+        toggleAddModal(false)
+    }
+
     return (
         <>
             <Header title={siteName}>
                 <Button
-                    onClick={() => { console.log("Add Mobie") }}
+                    onClick={openAddModal}
                     type="button"
                     buttonStyle="btn--outline-primary" >
                     + Add Movie
@@ -77,6 +87,11 @@ const App = () => {
                 </div>
             </div>
             <Footer title={siteName} />
+
+            <FilmModalEdit
+                isDisplay={isOpenAddModal}
+                closeCallback={closeAddModal}
+                modalTitle="Add movie" />
         </>
     )
 }

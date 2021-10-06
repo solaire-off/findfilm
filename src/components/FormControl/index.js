@@ -8,19 +8,19 @@ const STYLES = [
 ]
 
 const FormControl = ({
-    children,
     type,
     formControlStyle,
     placeholder,
-    additionalClass
+    additionalClass,
+    value
 }) => {
     const formControlIsInput = type === "text" ? true : false;
     const checkFormControlStyle = STYLES.includes(formControlStyle) ? formControlStyle : '';
-    const formControlClassName = `form-control ${checkFormControlStyle} ${additionalClass}`
+    const formControlClassName = `form-control ${checkFormControlStyle} ${additionalClass ? additionalClass : ''}`
 
     return formControlIsInput
-        ? <input className={formControlClassName} type="text" placeholder={placeholder}></input>
-        : <textarea className={formControlClassName} placeholder={placeholder}>{children}</textarea>
+        ? <input className={formControlClassName} type="text" placeholder={placeholder} defaultValue={value}></input>
+        : <textarea className={`${formControlClassName} form-control--textarea`} placeholder={placeholder} defaultValue={value}></textarea>
 }
 
 FormControl.propTypes = {
@@ -28,7 +28,8 @@ FormControl.propTypes = {
     type: PropTypes.string,
     formControlStyle: PropTypes.string,
     placeholder: PropTypes.string,
-    additionalClass: PropTypes.string
+    additionalClass: PropTypes.string,
+    value: PropTypes.string
 }
 
 export default FormControl
