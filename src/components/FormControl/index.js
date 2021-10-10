@@ -1,35 +1,55 @@
 import React from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
-import "./FormControl.sass"
+import "./FormControl.sass";
 
-const STYLES = [
-    "form-control--light",
-]
+const STYLES = ["form-control--light"];
 
 const FormControl = ({
-    type,
-    formControlStyle,
-    placeholder,
-    additionalClass,
-    value
+  type,
+  formControlStyle,
+  placeholder,
+  additionalClass,
+  value,
 }) => {
-    const formControlIsInput = type === "text" ? true : false;
-    const checkFormControlStyle = STYLES.includes(formControlStyle) ? formControlStyle : '';
-    const formControlClassName = `form-control ${checkFormControlStyle} ${additionalClass ? additionalClass : ''}`
+  const formControlIsInput = type === "text";
+  const checkFormControlStyle = STYLES.includes(formControlStyle)
+    ? formControlStyle
+    : "";
+  const formControlClassName = `form-control ${checkFormControlStyle} ${
+    additionalClass || ""
+  }`;
 
-    return formControlIsInput
-        ? <input className={formControlClassName} type="text" placeholder={placeholder} defaultValue={value}></input>
-        : <textarea className={`${formControlClassName} form-control--textarea`} placeholder={placeholder} defaultValue={value}></textarea>
-}
+  return formControlIsInput ? (
+    <input
+      className={formControlClassName}
+      type="text"
+      placeholder={placeholder}
+      defaultValue={value}
+    />
+  ) : (
+    <textarea
+      className={`${formControlClassName} form-control--textarea`}
+      placeholder={placeholder}
+      defaultValue={value}
+    />
+  );
+};
 
 FormControl.propTypes = {
-    children: PropTypes.string,
-    type: PropTypes.string,
-    formControlStyle: PropTypes.string,
-    placeholder: PropTypes.string,
-    additionalClass: PropTypes.string,
-    value: PropTypes.string
-}
+  type: PropTypes.string,
+  formControlStyle: PropTypes.string,
+  placeholder: PropTypes.string,
+  additionalClass: PropTypes.string,
+  value: PropTypes.string,
+};
 
-export default FormControl
+FormControl.defaultProps = {
+  type: "text",
+  formControlStyle: "",
+  placeholder: "",
+  additionalClass: "",
+  value: "",
+};
+
+export default FormControl;

@@ -1,33 +1,32 @@
- [
+[
   {
     "title": "Pulp Fiction",
     "genre": "Action & Adventure",
-    "release_date": "2004"
+    "releaseDate": "2004"
   },
   {
     "title": "Bohemian Rhapsody",
     "genre": "Drama, Biography, Music",
-    "release_date": "2003"
+    "releaseDate": "2003"
   },
   {
     "title": "Kill Bill: Vol 2",
     "genre": "Oscar winning Movie",
-    "release_date": "1994"
+    "releaseDate": "1994"
   },
   {
     "title": "Avengers: War of Infinity",
     "genre": "Action & Adventure",
-    "release_date": "2004"
+    "releaseDate": "2004"
   },
   {
     "title": "Inception",
     "genre": "Action & Adventure",
-    "release_date": "2003"
+    "releaseDate": "2003"
   },
   {
     "title": "Reservoir dogs",
     "genre": "Oscar winning Movie",
-    "release_date": "1994"
+    "releaseDate": "1994"
   }
 ]
-
