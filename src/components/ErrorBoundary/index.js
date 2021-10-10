@@ -1,23 +1,39 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 export default class ErrorBoundary extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            errorInfo: null
-        }
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: null,
+      errorInfo: null,
+    };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    this.setState({
+      error,
+      errorInfo,
+    });
+  }
+
+  render() {
+    const { errorInfo, error } = this.state;
+    const { children } = this.props;
+    if (errorInfo) {
+      return (
+        <>
+          <p>Oops, something went wrong! See console.log</p>
+          <pre>
+            <code>{error}</code>
+          </pre>
+        </>
+      );
     }
-    componentDidCatch(error, errorInfo) {
-        this.setState({
-            error: error,
-            errorInfo: errorInfo
-        })
-    }
-    render() {
-        if (this.state.errorInfo) {
-            return <p>Oops, something went wrong!</p>
-        }
-        return this.props.children
-    }
+    return children;
+  }
 }
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.node.isRequired,
+};
