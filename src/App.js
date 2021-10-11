@@ -1,18 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import FilmList from "./components/FilmList";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Search from "./components/Search";
-import Button from "./components/Button";
 import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Dropdown from "./components/Dropdown";
 import Tabs from "./components/Tabs";
-import { FilmModalEdit } from "./components/FilmModalEdit";
+import { FilmInfoContextProvider } from "./context/FilmInfoContext";
 
 import "./App.sass";
-
-import FilmListData from "./assets/json/film-list.json";
 
 const App = () => {
   const siteName = ["netflix", "roulette"];
@@ -49,28 +45,10 @@ const App = () => {
     },
   ];
 
-  const [isOpenAddModal, toggleAddModal] = useState(false);
-  const openAddModal = () => {
-    toggleAddModal(true);
-  };
-  const closeAddModal = () => {
-    toggleAddModal(false);
-  };
-
   return (
-    <>
-      <Header title={siteName}>
-        <Button
-          onClick={openAddModal}
-          type="button"
-          buttonStyle="btn--outline-primary"
-        >
-          + Add Movie
-        </Button>
-      </Header>
-      <Hero title="FIND YOUR MOVIE">
-        <Search />
-      </Hero>
+    <FilmInfoContextProvider value={null}>
+      <Header title={siteName} />
+      <Hero title="FIND YOUR MOVIE" />
       <div className="main">
         <div className="container">
           <ErrorBoundary>
@@ -80,17 +58,12 @@ const App = () => {
             </div>
           </ErrorBoundary>
           <ErrorBoundary>
-            <FilmList list={FilmListData} />
+            <FilmList />
           </ErrorBoundary>
         </div>
       </div>
       <Footer title={siteName} />
-      <FilmModalEdit
-        isDisplay={isOpenAddModal}
-        closeCallback={closeAddModal}
-        modalTitle="Add movie"
-      />
-    </>
+    </FilmInfoContextProvider>
   );
 };
 
