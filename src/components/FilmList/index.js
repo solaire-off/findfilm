@@ -1,35 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import FilmItem from "../FilmItem";
-import { FilmModalEdit } from "../FilmModalEdit";
-import { ConfirmModal } from "../ConfirmModal";
 import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
 import FilmListData from "../../assets/json/film-list.json";
+import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 
 const FilmList = () => {
-  const [isOpenEditModal, toggleEditModal] = useState(false);
-  const openEditModal = () => {
-    toggleEditModal(true);
-  };
-  const closeEditModal = () => {
-    toggleEditModal(false);
+  const setActiveModal = useModalManagerActionContext();
+
+  const toggleAddModal = (id) => {
+    setActiveModal({
+      type: "ADD_FILM",
+      props: {
+        modalTitle: "Edit movie",
+        id,
+      },
+    });
   };
 
-  const [isOpenDeleteModal, toggleDeleteModal] = useState(false);
-  const openDeleteConfirm = () => {
-    toggleDeleteModal(true);
+  const deleteMovie = (id) => {
+    // eslint-disable-next-line no-console
+    console.log(`Demo: deleted movie with ID=${id}`);
   };
-  const closeDeleteConfirm = () => {
-    toggleDeleteModal(false);
+
+  const toggleDeleteModal = (id) => {
+    setActiveModal({
+      type: "CONFIRMATION",
+      props: {
+        confirmCallback: () => {
+          deleteMovie(id);
+        },
+        modalTitle: "Delete movie",
+        modalDescr: "Are you sure you want to delete this movie?",
+      },
+    });
   };
 
   const filmCardActions = [
     {
       name: "Edit",
-      callback: openEditModal,
+      callback: toggleAddModal,
     },
     {
       name: "Delete",
-      callback: openDeleteConfirm,
+      callback: toggleDeleteModal,
     },
   ];
 
@@ -58,6 +71,7 @@ const FilmList = () => {
           </div>
         ))}
       </div>
+      {/*
       <FilmModalEdit
         isDisplay={isOpenEditModal}
         closeCallback={closeEditModal}
@@ -77,6 +91,7 @@ const FilmList = () => {
         modalTitle="Delete movie"
         modalDescr="Are you sure you want to delete this movie?"
       />
+      */}
     </>
   ) : (
     <p>Films not found</p>

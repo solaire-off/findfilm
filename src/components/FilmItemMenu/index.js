@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 
-export const FilmItemMenu = ({ actions }) => {
+export const FilmItemMenu = ({ id, actions }) => {
   const [showMenu, setShowMenu] = useState(false);
   const menuRef = useRef(null);
   const handleClickOutside = (event) => {
@@ -41,7 +41,7 @@ export const FilmItemMenu = ({ actions }) => {
             key={`${name}`}
             onClick={() => {
               setShowMenu(false);
-              callback();
+              callback(id);
             }}
             className="film-card__actions-item"
           >
@@ -54,6 +54,7 @@ export const FilmItemMenu = ({ actions }) => {
 };
 
 FilmItemMenu.propTypes = {
+  id: PropTypes.string.isRequired,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,

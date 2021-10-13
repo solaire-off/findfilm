@@ -19,7 +19,7 @@ const FilmItem = ({
 }) => {
   return (
     <div className="film-card">
-      {actions && <FilmItemMenu actions={actions} />}
+      {actions && <FilmItemMenu id={id} actions={actions} />}
       <div onClick={() => onClick(id)} className="film-card__in">
         <img className="film-card__thumbnail" src={thumbnail} alt={title} />
         <div className="film-card__header">

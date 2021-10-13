@@ -6,7 +6,9 @@ import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Dropdown from "./components/Dropdown";
 import Tabs from "./components/Tabs";
+import { ModalManager } from "./components/ModalManager";
 import { FilmInfoContextProvider } from "./context/FilmInfoContext";
+import { ModalManagerProvider } from "./context/ModalManagerContext";
 
 import "./App.sass";
 
@@ -46,23 +48,26 @@ const App = () => {
   ];
 
   return (
-    <FilmInfoContextProvider value={null}>
-      <Header title={siteName} />
-      <Hero title="FIND YOUR MOVIE" />
-      <div className="main">
-        <div className="container">
-          <ErrorBoundary>
-            <div className="settings">
-              <Tabs list={tabsItems} />
-              <Dropdown label="Sort by" options={sortTypes} />
-            </div>
-          </ErrorBoundary>
-          <ErrorBoundary>
-            <FilmList />
-          </ErrorBoundary>
+    <FilmInfoContextProvider>
+      <ModalManagerProvider>
+        <Header title={siteName} />
+        <Hero title="FIND YOUR MOVIE" />
+        <div className="main">
+          <div className="container">
+            <ErrorBoundary>
+              <div className="settings">
+                <Tabs list={tabsItems} />
+                <Dropdown label="Sort by" options={sortTypes} />
+              </div>
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <FilmList />
+            </ErrorBoundary>
+          </div>
         </div>
-      </div>
-      <Footer title={siteName} />
+        <Footer title={siteName} />
+        <ModalManager />
+      </ModalManagerProvider>
     </FilmInfoContextProvider>
   );
 };
