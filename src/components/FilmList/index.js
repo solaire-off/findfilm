@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import FilmItem from "../FilmItem";
 import { FilmModalEdit } from "../FilmModalEdit";
 import { ConfirmModal } from "../ConfirmModal";
+import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
+import FilmListData from "../../assets/json/film-list.json";
 
-const FilmList = ({ list }) => {
+const FilmList = () => {
   const [isOpenEditModal, toggleEditModal] = useState(false);
   const openEditModal = () => {
     toggleEditModal(true);
@@ -32,7 +33,10 @@ const FilmList = ({ list }) => {
     },
   ];
 
-  const count = list ? list.length : 0;
+  const count = FilmListData ? FilmListData.length : 0;
+
+  const setSelectedFilm = useFilmInfoActionContext();
+
   return count ? (
     <>
       <p className="notification-caption">
@@ -40,13 +44,16 @@ const FilmList = ({ list }) => {
         movies found
       </p>
       <div className="row">
-        {list.map((item) => (
+        {FilmListData.map((item) => (
           <div key={item.title} className="row__item">
             <FilmItem
+              id={item.id}
               title={item.title}
               genre={item.genre}
+              thumbnail={item.thumbnail}
               releaseDate={item.releaseDate}
               actions={filmCardActions}
+              onClick={setSelectedFilm}
             />
           </div>
         ))}
@@ -74,10 +81,6 @@ const FilmList = ({ list }) => {
   ) : (
     <p>Films not found</p>
   );
-};
-
-FilmList.propTypes = {
-  list: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default FilmList;

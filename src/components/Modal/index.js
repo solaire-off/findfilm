@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import { useDelayUnmount } from "../../Heplers";
 
@@ -19,18 +19,21 @@ export const Modal = ({
 
   const ref = useRef(null);
 
-  const handleClickOutside = (event) => {
-    if (ref.current && !ref.current.contains(event.target)) {
-      closeCallback();
-    }
-  };
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        closeCallback();
+      }
+    },
+    [ref]
+  );
 
-  const handleEscPress = (event) => {
+  const handleEscPress = useCallback((event) => {
     const { key } = event;
     if (key === "Escape") {
       closeCallback();
     }
-  };
+  });
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);

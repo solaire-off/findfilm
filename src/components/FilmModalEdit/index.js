@@ -80,7 +80,11 @@ export const FilmModalEdit = ({
           <div className="film-modal__group">
             <label className="label">
               <span className="label__caption">OVERVIEW</span>
-              <FormControl placeholder="Movie description" value={overview} />
+              <FormControl
+                placeholder="Movie description"
+                type="textarea"
+                value={overview}
+              />
             </label>
           </div>
         </div>
