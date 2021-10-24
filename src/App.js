@@ -1,74 +1,41 @@
 import React from "react";
-import FilmList from "./components/FilmList";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import Footer from "./components/Footer";
-import ErrorBoundary from "./components/ErrorBoundary";
-import Dropdown from "./components/Dropdown";
-import Tabs from "./components/Tabs";
+import { Provider } from "react-redux";
+import { FilmList } from "./components/FilmList";
+import { Header } from "./components/Header";
+import { Hero } from "./components/Hero";
+import { Footer } from "./components/Footer";
+import { FilmListSettings } from "./components/FilmListSettings";
+import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ModalManager } from "./components/ModalManager";
 import { FilmInfoContextProvider } from "./context/FilmInfoContext";
 import { ModalManagerProvider } from "./context/ModalManagerContext";
-
+import { store } from "./store";
 import "./App.sass";
 
 const App = () => {
   const siteName = ["netflix", "roulette"];
-  const tabsItems = [
-    {
-      name: "All",
-      isActive: true,
-    },
-    {
-      name: "Documentary",
-      isActive: false,
-    },
-    {
-      name: "Comedy",
-      isActive: false,
-    },
-    {
-      name: "Horror",
-      isActive: false,
-    },
-    {
-      name: "Crime",
-      isActive: false,
-    },
-  ];
-  const sortTypes = [
-    {
-      name: "release date",
-      value: "release_date",
-    },
-    {
-      name: "movie title",
-      value: "title",
-    },
-  ];
 
   return (
-    <FilmInfoContextProvider>
-      <ModalManagerProvider>
-        <Header title={siteName} />
-        <Hero title="FIND YOUR MOVIE" />
-        <div className="main">
-          <div className="container">
-            <ErrorBoundary>
-              <div className="settings">
-                <Tabs list={tabsItems} />
-                <Dropdown label="Sort by" options={sortTypes} />
-              </div>
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <FilmList />
-            </ErrorBoundary>
+    <Provider store={store}>
+      <FilmInfoContextProvider>
+        <ModalManagerProvider>
+          <Header title={siteName} />
+          <Hero title="FIND YOUR MOVIE" />
+          <div className="main">
+            <div className="container">
+              <ErrorBoundary>
+                <FilmListSettings />
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <FilmList />
+              </ErrorBoundary>
+            </div>
           </div>
-        </div>
-        <Footer title={siteName} />
-        <ModalManager />
-      </ModalManagerProvider>
-    </FilmInfoContextProvider>
+          <Footer title={siteName} />
+          <ModalManager />
+        </ModalManagerProvider>
+      </FilmInfoContextProvider>
+    </Provider>
   );
 };
 

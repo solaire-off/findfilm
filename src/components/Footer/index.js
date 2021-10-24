@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import "./Footer.sass";
 
-const Footer = ({ title }) => (
+export const Footer = ({ title }) => (
   <footer className="footer">
     <p className="footer__title">
       <span className="font-weight-black">{title[0]}</span>
@@ -15,5 +15,3 @@ const Footer = ({ title }) => (
 Footer.propTypes = {
   title: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-export default Footer;

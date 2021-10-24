@@ -5,12 +5,13 @@ import "./FormControl.sass";
 
 const STYLES = ["form-control--light"];
 
-const FormControl = ({
+export const FormControl = ({
   type,
   formControlStyle,
   placeholder,
   additionalClass,
   value,
+  disabled,
 }) => {
   const formControlIsInput = type === "text";
   const checkFormControlStyle = STYLES.includes(formControlStyle)
@@ -24,14 +25,16 @@ const FormControl = ({
     <input
       className={formControlClassName}
       type="text"
-      placeholder={placeholder}
-      defaultValue={value}
+      placeholder={disabled ? null : placeholder}
+      defaultValue={disabled ? null : value}
+      disabled={disabled}
     />
   ) : (
     <textarea
       className={`${formControlClassName} form-control--textarea`}
-      placeholder={placeholder}
-      defaultValue={value}
+      placeholder={disabled ? null : placeholder}
+      defaultValue={disabled ? null : value}
+      disabled={disabled}
     />
   );
 };
@@ -42,14 +45,14 @@ FormControl.propTypes = {
   placeholder: PropTypes.string,
   additionalClass: PropTypes.string,
   value: PropTypes.string,
+  disabled: PropTypes.bool,
 };
 
 FormControl.defaultProps = {
   type: "text",
-  formControlStyle: "",
-  placeholder: "",
-  additionalClass: "",
-  value: "",
+  formControlStyle: null,
+  placeholder: null,
+  additionalClass: null,
+  value: null,
+  disabled: false,
 };
-
-export default FormControl;

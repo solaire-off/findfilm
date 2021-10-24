@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Button from "../Button";
+import { Button } from "../Button";
 import {
   useFilmInfoContext,
   useFilmInfoActionContext,
@@ -9,7 +9,7 @@ import { useModalManagerActionContext } from "../../context/ModalManagerContext"
 
 import "./Header.sass";
 
-const Header = ({ title }) => {
+export const Header = ({ title }) => {
   const setActiveModal = useModalManagerActionContext();
   const toggleAddModal = () => {
     setActiveModal({
@@ -82,5 +82,3 @@ const Header = ({ title }) => {
 Header.propTypes = {
   title: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-export default Header;

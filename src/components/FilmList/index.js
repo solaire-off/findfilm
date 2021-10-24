@@ -1,10 +1,28 @@
-import React from "react";
-import FilmItem from "../FilmItem";
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { FilmItem } from "../FilmItem";
 import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
-import FilmListData from "../../assets/json/film-list.json";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
+import { fetchFilms } from "../../action/films";
 
-const FilmList = () => {
+const mapStateToProps = (store) => {
+  return {
+    filmsList: store.films.list,
+    filmsSelectedGenre: store.films.genre,
+    filmsSelectedSort: store.films.sort,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchFilmsInState: (count) => dispatch(fetchFilms(count)),
+  };
+};
+
+export const FilmList = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(({ filmsList, fetchFilmsInState, filmsSelectedGenre, filmsSelectedSort }) => {
   const setActiveModal = useModalManagerActionContext();
 
   const toggleAddModal = (id) => {
@@ -46,56 +64,37 @@ const FilmList = () => {
     },
   ];
 
-  const count = FilmListData ? FilmListData.length : 0;
+  useEffect(() => {
+    fetchFilmsInState(18);
+  }, [filmsSelectedGenre, filmsSelectedSort]);
+
+  const count = filmsList ? filmsList.length : 0;
 
   const setSelectedFilm = useFilmInfoActionContext();
 
-  return count ? (
+  return (
     <>
       <p className="notification-caption">
         <span className="font-weight-semibold"> {count} </span>
         movies found
       </p>
-      <div className="row">
-        {FilmListData.map((item) => (
-          <div key={item.title} className="row__item">
-            <FilmItem
-              id={item.id}
-              title={item.title}
-              genre={item.genre}
-              thumbnail={item.thumbnail}
-              releaseDate={item.releaseDate}
-              actions={filmCardActions}
-              onClick={setSelectedFilm}
-            />
-          </div>
-        ))}
-      </div>
-      {/*
-      <FilmModalEdit
-        isDisplay={isOpenEditModal}
-        closeCallback={closeEditModal}
-        modalTitle="Edit movie"
-        title="Moana"
-        releaseDate="11/14/2016"
-        url="https://www.moana.com"
-        rating="7.6"
-        genre="Some Genre"
-        runtime="1h 47min"
-        overview="Moana Waialiki is a sea voyaging enthusiast and the only daughter of a chief in a long line of navigators. When her island's fishermen can't catch any fish and the crops fail, she learns that the demigod Maui caused the blight by stealing the heart of the goddess, Te Fiti. The only way to heal the island is to persuade Maui to return Te Fiti's heart, so Moana sets off on an epic journey across the Pacific. The film is based on stories from Polynesian mythology."
-      />
-      <ConfirmModal
-        isDisplay={isOpenDeleteModal}
-        closeCallback={closeDeleteConfirm}
-        confirmCallback={closeDeleteConfirm}
-        modalTitle="Delete movie"
-        modalDescr="Are you sure you want to delete this movie?"
-      />
-      */}
+      {count && (
+        <div className="row">
+          {filmsList.map((item) => (
+            <div key={item.title} className="row__item">
+              <FilmItem
+                id={item.id}
+                title={item.title}
+                genres={item.genres}
+                thumbnail={item.poster_path}
+                releaseDate={item.release_date}
+                actions={filmCardActions}
+                onClick={setSelectedFilm}
+              />
+            </div>
+          ))}
+        </div>
+      )}
     </>
-  ) : (
-    <p>Films not found</p>
   );
-};
-
-export default FilmList;
+});

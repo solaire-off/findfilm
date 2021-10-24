@@ -29,3 +29,15 @@ export const addPropsToChildren = (children, props) => {
   });
   return childrenWithProps;
 };
+
+export const minutesToHoursAndMinutes = (n) => {
+  if (n === null) {
+    return 0;
+  }
+  const num = n;
+  const hours = num / 60;
+  const rhours = Math.floor(hours);
+  const minutes = (hours - rhours) * 60;
+  const rminutes = Math.round(minutes);
+  return `${rhours}h ${rminutes}min`;
+};

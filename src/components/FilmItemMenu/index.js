@@ -54,7 +54,7 @@ export const FilmItemMenu = ({ id, actions }) => {
 };
 
 FilmItemMenu.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,

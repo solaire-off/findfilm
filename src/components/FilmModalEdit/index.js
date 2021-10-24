@@ -1,23 +1,37 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
-import FormControl from "../FormControl";
-import Button from "../Button";
-import FilmListData from "../../assets/json/film-list.json";
+import { minutesToHoursAndMinutes } from "../../Heplers";
+import { FormControl } from "../FormControl";
+import { Button } from "../Button";
 
 import "./FilmModal.sass";
 
 export const FilmModalEdit = ({ modalTitle, id, closeModal }) => {
+  const [selectedFilm, setSelectedFilm] = useState(null);
+
   const handleFormSubmit = (event) => {
     event.preventDefault();
     closeModal();
   };
-  const selectedFilm = id ? FilmListData.find((film) => film.id === id) : null;
+
+  const fetchFilmByID = (filmID) => {
+    fetch(`http://localhost:4000/movies/${filmID}`)
+      .then((response) => response.json())
+      .then((filmData) => setSelectedFilm(filmData));
+  };
+
+  useEffect(() => {
+    fetchFilmByID(id);
+  }, [id]);
+
   const checkTitle = selectedFilm ? selectedFilm.title : null;
-  const checkReleaseDate = selectedFilm ? selectedFilm.releaseDate : null;
-  const checkUrl = selectedFilm ? selectedFilm.url : null;
-  const checkRating = selectedFilm ? selectedFilm.rating : null;
-  const checkGenre = selectedFilm ? selectedFilm.genre : null;
-  const checkRuntime = selectedFilm ? selectedFilm.runtime : null;
+  const checkReleaseDate = selectedFilm ? selectedFilm.release_date : null;
+  const checkUrl = selectedFilm ? selectedFilm.poster_path : null;
+  const checkRating = selectedFilm ? selectedFilm.vote_average : null;
+  const checkGenre = selectedFilm ? selectedFilm.genres.join(", ") : null;
+  const checkRuntime = selectedFilm
+    ? minutesToHoursAndMinutes(selectedFilm.runtime)
+    : null;
   const checkOverview = selectedFilm ? selectedFilm.overview : null;
   return (
     <form action="." method="POST" onSubmit={handleFormSubmit}>
