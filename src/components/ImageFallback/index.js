@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 export const ImageFallback = ({ className, src, fallback, alt }) => {
-  const [imageUrl, setImageUrl] = useState(src);
+  const [imageUrl, setImageUrl] = useState(src || fallback);
 
   useEffect(() => {
-    setImageUrl(src);
+    setImageUrl(src || fallback);
   }, [src]);
 
   const errorImageLoad = () => {
@@ -23,8 +23,12 @@ export const ImageFallback = ({ className, src, fallback, alt }) => {
 
 ImageFallback.propTypes = {
   className: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
+  src: PropTypes.string,
   fallback: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
     .isRequired,
   alt: PropTypes.string.isRequired,
+};
+
+ImageFallback.defaultProps = {
+  src: null,
 };

@@ -24,15 +24,10 @@ export const FilmInfo = ({ id }) => {
     scrollToTop();
   }, [id]);
 
-  let genresCaption = "";
-  let releaseDateObject = new Date();
-  let runtime = 0;
-  if (film) {
-    runtime = minutesToHoursAndMinutes(film.runtime);
-    genresCaption = film.genres.join(", ");
-    releaseDateObject = new Date(film.release_date);
-  }
+  const genresCaption = film ? film.genres.join(", ") : "";
+  const releaseDateObject = film ? film.genres.join(", ") : new Date();
   const releaseYear = releaseDateObject.getFullYear();
+  const runtime = film ? minutesToHoursAndMinutes(film.runtime) : 0;
 
   return (
     film && (

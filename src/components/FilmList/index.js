@@ -5,18 +5,14 @@ import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 import { fetchFilms } from "../../action/films";
 
-const mapStateToProps = (store) => {
-  return {
-    filmsList: store.films.list,
-    filmsSelectedGenre: store.films.genre,
-    filmsSelectedSort: store.films.sort,
-  };
-};
+const mapStateToProps = (store) => ({
+  filmsList: store.films.list,
+  filmsSelectedGenre: store.films.genre,
+  filmsSelectedSort: store.films.sort,
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchFilmsInState: (count) => dispatch(fetchFilms(count)),
-  };
+const mapDispatchToProps = {
+  fetchFilmsInState: (count) => fetchFilms(count),
 };
 
 export const FilmList = connect(

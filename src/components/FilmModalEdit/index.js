@@ -24,15 +24,15 @@ export const FilmModalEdit = ({ modalTitle, id, closeModal }) => {
     fetchFilmByID(id);
   }, [id]);
 
-  const checkTitle = selectedFilm ? selectedFilm.title : null;
-  const checkReleaseDate = selectedFilm ? selectedFilm.release_date : null;
-  const checkUrl = selectedFilm ? selectedFilm.poster_path : null;
-  const checkRating = selectedFilm ? selectedFilm.vote_average : null;
-  const checkGenre = selectedFilm ? selectedFilm.genres.join(", ") : null;
+  const checkTitle = selectedFilm?.title;
+  const checkReleaseDate = selectedFilm?.release_date;
+  const checkUrl = selectedFilm?.poster_path;
+  const checkRating = selectedFilm?.vote_average;
+  const checkGenre = selectedFilm?.genres.join(", ");
   const checkRuntime = selectedFilm
     ? minutesToHoursAndMinutes(selectedFilm.runtime)
     : null;
-  const checkOverview = selectedFilm ? selectedFilm.overview : null;
+  const checkOverview = selectedFilm?.overview;
   return (
     <form action="." method="POST" onSubmit={handleFormSubmit}>
       <div className="modal__header">
@@ -122,8 +122,7 @@ export const FilmModalEdit = ({ modalTitle, id, closeModal }) => {
 
 FilmModalEdit.propTypes = {
   modalTitle: PropTypes.string.isRequired,
-  id: PropTypes.string,
-
+  id: PropTypes.number,
   closeModal: PropTypes.func,
 };
 

@@ -4,11 +4,9 @@ import { setGenre, setSort } from "../../action/films";
 import { Dropdown } from "../Dropdown";
 import { Tabs } from "../Tabs";
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setSelectedGenre: (genre) => dispatch(setGenre(genre)),
-    setSelectedSort: (type) => dispatch(setSort(type)),
-  };
+const mapDispatchToProps = {
+  setSelectedGenre: (genre) => setGenre(genre),
+  setSelectedSort: (type) => setSort(type),
 };
 
 export const FilmListSettings = connect(
@@ -44,11 +42,7 @@ export const FilmListSettings = connect(
   ];
 
   const filterFilmsByGenre = (genre) => {
-    let value = genre;
-    if (value === "All") {
-      value = null;
-    }
-    setSelectedGenre(value);
+    setSelectedGenre(genre === "All" ? null : genre);
   };
 
   const sortFilmsByField = (filter) => {
