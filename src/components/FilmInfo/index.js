@@ -25,7 +25,7 @@ export const FilmInfo = ({ id }) => {
   }, [id]);
 
   const genresCaption = film ? film.genres.join(", ") : "";
-  const releaseDateObject = film ? film.genres.join(", ") : new Date();
+  const releaseDateObject = film ? new Date(film.release_date) : new Date();
   const releaseYear = releaseDateObject.getFullYear();
   const runtime = film ? minutesToHoursAndMinutes(film.runtime) : 0;
 
