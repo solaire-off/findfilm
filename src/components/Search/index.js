@@ -1,10 +1,10 @@
 import React from "react";
-import Button from "../Button";
-import FormControl from "../FormControl";
+import { Button } from "../Button";
+import { FormControl } from "../FormControl";
 
 import "./Search.sass";
 
-const Search = () => (
+export const Search = () => (
   <form className="search" action="." method="GET">
     <FormControl
       type="text"
@@ -22,5 +22,3 @@ const Search = () => (
     </Button>
   </form>
 );
-
-export default Search;

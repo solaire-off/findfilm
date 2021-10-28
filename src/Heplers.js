@@ -1,4 +1,10 @@
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect,
+  Children,
+  isValidElement,
+  cloneElement,
+} from "react";
 
 export const useDelayUnmount = (isMounted, delayTime) => {
   const [showDiv, setShowDiv] = useState(false);
@@ -12,4 +18,26 @@ export const useDelayUnmount = (isMounted, delayTime) => {
     return () => clearTimeout(timeoutId);
   }, [isMounted, delayTime, showDiv]);
   return showDiv;
+};
+
+export const addPropsToChildren = (children, props) => {
+  const childrenWithProps = Children.map(children, (child) => {
+    if (isValidElement(child)) {
+      return cloneElement(child, props);
+    }
+    return child;
+  });
+  return childrenWithProps;
+};
+
+export const minutesToHoursAndMinutes = (n) => {
+  if (n === null) {
+    return 0;
+  }
+  const num = n;
+  const hours = num / 60;
+  const rhours = Math.floor(hours);
+  const minutes = (hours - rhours) * 60;
+  const rminutes = Math.round(minutes);
+  return `${rhours}h ${rminutes}min`;
 };

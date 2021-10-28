@@ -7,7 +7,7 @@ const STYLES = ["btn--primary", "btn--outline-primary", "btn--outline-danger"];
 
 const SIZES = ["btn--sm", "btn--lg"];
 
-const Button = ({
+export const Button = ({
   children,
   type,
   onClick,
@@ -47,5 +47,3 @@ Button.defaultProps = {
   buttonSize: "",
   additionalClass: "",
 };
-
-export default Button;

@@ -1,26 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import Button from "../Button";
-import { FilmModalEdit } from "../FilmModalEdit";
+import { Button } from "../Button";
 import {
   useFilmInfoContext,
   useFilmInfoActionContext,
 } from "../../context/FilmInfoContext";
+import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 
 import "./Header.sass";
 
-const Header = ({ title }) => {
+export const Header = ({ title }) => {
+  const setActiveModal = useModalManagerActionContext();
+  const toggleAddModal = () => {
+    setActiveModal({
+      type: "ADD_FILM",
+      props: {
+        modalTitle: "Add movie",
+      },
+    });
+  };
+
   const selectedFilmID = useFilmInfoContext();
   const setSelectedFilmID = useFilmInfoActionContext();
-
-  const [isOpenAddModal, toggleAddModal] = useState(false);
-  const openAddModal = () => {
-    toggleAddModal(true);
-  };
-  const closeAddModal = () => {
-    toggleAddModal(false);
-  };
-
   const unsetSelectedFilm = () => {
     setSelectedFilmID(null);
   };
@@ -35,7 +36,7 @@ const Header = ({ title }) => {
             </p>
             {!selectedFilmID ? (
               <Button
-                onClick={openAddModal}
+                onClick={toggleAddModal}
                 type="button"
                 buttonStyle="btn--outline-primary"
               >
@@ -74,11 +75,6 @@ const Header = ({ title }) => {
           </div>
         </div>
       </header>
-      <FilmModalEdit
-        isDisplay={isOpenAddModal}
-        closeCallback={closeAddModal}
-        modalTitle="Add movie"
-      />
     </>
   );
 };
@@ -86,5 +82,3 @@ const Header = ({ title }) => {
 Header.propTypes = {
   title: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-export default Header;
