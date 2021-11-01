@@ -4,6 +4,7 @@ import { FilmItem } from "../FilmItem";
 import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 import { fetchFilms } from "../../action/films";
+import { FETCH_FILMS_COUNT } from "../../Constants";
 
 const mapStateToProps = (store) => ({
   filmsList: store.films.list,
@@ -31,9 +32,12 @@ export const FilmList = connect(
     });
   };
 
-  const deleteMovie = (id) => {
-    // eslint-disable-next-line no-console
-    console.log(`Demo: deleted movie with ID=${id}`);
+  const deleteMovieAndRefetch = (id) => {
+    fetch(`http://localhost:4000/movies/${id}`, {
+      method: "DELETE",
+    }).then(() => {
+      fetchFilmsInState(FETCH_FILMS_COUNT);
+    });
   };
 
   const toggleDeleteModal = (id) => {
@@ -41,7 +45,7 @@ export const FilmList = connect(
       type: "CONFIRMATION",
       props: {
         confirmCallback: () => {
-          deleteMovie(id);
+          deleteMovieAndRefetch(id);
         },
         modalTitle: "Delete movie",
         modalDescr: "Are you sure you want to delete this movie?",
@@ -61,7 +65,7 @@ export const FilmList = connect(
   ];
 
   useEffect(() => {
-    fetchFilmsInState(18);
+    fetchFilmsInState(FETCH_FILMS_COUNT);
   }, [filmsSelectedGenre, filmsSelectedSort]);
 
   const count = filmsList ? filmsList.length : 0;

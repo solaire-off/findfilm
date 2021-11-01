@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 
 import "./FormControl.sass";
@@ -12,8 +12,10 @@ export const FormControl = ({
   additionalClass,
   value,
   disabled,
+  callback,
 }) => {
-  const formControlIsInput = type === "text";
+  useEffect(() => {}, [value]);
+  const formControlIsInput = type !== "textarea";
   const checkFormControlStyle = STYLES.includes(formControlStyle)
     ? formControlStyle
     : "";
@@ -24,10 +26,11 @@ export const FormControl = ({
   return formControlIsInput ? (
     <input
       className={formControlClassName}
-      type="text"
+      type={type}
       placeholder={disabled ? null : placeholder}
       defaultValue={disabled ? null : value}
       disabled={disabled}
+      onChange={(e) => callback(e.target.value)}
     />
   ) : (
     <textarea
@@ -35,6 +38,7 @@ export const FormControl = ({
       placeholder={disabled ? null : placeholder}
       defaultValue={disabled ? null : value}
       disabled={disabled}
+      onChange={(e) => callback(e.target.value)}
     />
   );
 };
@@ -46,6 +50,7 @@ FormControl.propTypes = {
   additionalClass: PropTypes.string,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   disabled: PropTypes.bool,
+  callback: PropTypes.func,
 };
 
 FormControl.defaultProps = {
@@ -55,4 +60,5 @@ FormControl.defaultProps = {
   additionalClass: null,
   value: null,
   disabled: false,
+  callback: () => {},
 };

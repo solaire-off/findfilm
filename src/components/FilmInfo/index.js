@@ -24,11 +24,12 @@ export const FilmInfo = ({ id }) => {
     scrollToTop();
   }, [id]);
 
+  const filmDate = film?.release_date;
   const genresCaption = film ? film.genres.join(", ") : "";
   const releaseDateObject = film ? new Date(film.release_date) : new Date();
   const releaseYear = releaseDateObject.getFullYear();
   const runtime = film ? minutesToHoursAndMinutes(film.runtime) : 0;
-
+  const rating = film?.vote_average;
   return (
     film && (
       <div className="film-article">
@@ -44,16 +45,16 @@ export const FilmInfo = ({ id }) => {
             <div className="film-article__header">
               <p className="film-article__title">
                 <span>{film.title}</span>
-                {film.vote_average !== 0 ? (
-                  <span className="film-article__rating">
-                    {film.vote_average}
-                  </span>
+                {rating ? (
+                  <span className="film-article__rating">{rating}</span>
                 ) : null}
               </p>
               <p className="film-article__subtitle">{genresCaption}</p>
             </div>
             <p className="film-article__meta-list">
-              <span className="film-article__meta">{releaseYear}</span>
+              {filmDate && (
+                <span className="film-article__meta">{releaseYear}</span>
+              )}
               {runtime !== 0 ? (
                 <span className="film-article__meta">{runtime}</span>
               ) : null}
