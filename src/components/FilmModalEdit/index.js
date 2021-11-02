@@ -118,16 +118,12 @@ export const FilmModalEdit = connect(
     enableReinitialize: true,
   });
 
-  const genresOptionsForSelect = formik.initialValues.genres
-    .concat(
-      GENRES_LIST.filter(
-        (genre) => formik.initialValues.genres.indexOf(genre) < 1
-      )
-    )
-    .map((genre) => ({
-      value: genre,
-      label: genre,
-    }));
+  const genresOptionsForSelect = Array.from(
+    new Set(formik.initialValues.genres.concat(GENRES_LIST))
+  ).map((genre) => ({
+    value: genre,
+    label: genre,
+  }));
 
   const handleGenresSelect = (genres) => {
     setGenres(genres);
