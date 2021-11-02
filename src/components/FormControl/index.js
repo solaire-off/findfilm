@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import "./FormControl.sass";
@@ -14,7 +14,6 @@ export const FormControl = ({
   disabled,
   callback,
 }) => {
-  useEffect(() => {}, [value]);
   const formControlIsInput = type !== "textarea";
   const checkFormControlStyle = STYLES.includes(formControlStyle)
     ? formControlStyle
