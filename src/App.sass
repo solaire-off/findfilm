@@ -1,4 +1,6 @@
 @import "~normalize.css/normalize.css"
+@import "~react-datepicker/dist/react-datepicker.css"
+
 @import Variables.sass
 
 *
@@ -80,3 +82,90 @@ body
     &:hover,
     &:focus
         opacity: 0.5
+
+.form-alert
+    font-size: 14px
+    line-height: 17px
+    opacity: 0.8
+    margin: 5px 0 0
+
+.text-danger
+    color: $danger
+
+.react-select
+    cursor: pointer
+    & &__container
+        outline: none
+        opacity: 0.8
+    & &__control
+        background: transparent
+        border: none
+        font-size: 20px
+        line-height: 1.1
+        background: rgba(50, 50, 50, 0.948044)
+        padding: 10.7px 6px 10.7px 16px
+        &--menu-is-open
+            .react-select__dropdown-indicator
+                transform: rotate(180deg)
+    & &__multivalue
+        background:
+    & &__value
+        &-container
+            padding: 0
+            opacity: 0.8
+            border-radius: 4px
+            border: none
+            color: white
+            display: flex
+            width: 100%
+            resize: none
+            font-weight: 400
+            &:hover,
+                outline: none
+                background: rgba(50, 50, 50, 1)
+    & &__indicator
+        color: $danger
+        opacity: 0.8
+    & &__dropdown-indicator
+        color: $danger
+        opacity: 0.8
+        transition: transform 0.3s ease
+        &:hover
+            color: $danger
+    & &__clear-indicator
+        display: none
+    & &__indicator-separator
+        display: none
+    & &__menu
+        background: $black
+    & &__option
+        font-size: 20px
+        line-height: 24px
+        opacity: 0.8
+        background-color: none
+        &:hover,
+        &:focus
+        &:active
+            background-color: none
+        label
+            &::before
+                content: " "
+                display: inline-block
+                background-color: #FFFFFF
+                border: 1px solid #E6E8ED
+                box-sizing: border-box
+                border-radius: 2px
+                width: 16px
+                height: 16px
+                margin-right: 7px
+        input
+            display: none
+            &:checked
+                ~ label
+                    &::before
+                        background-color: $danger
+                        border-color: $danger
+                        background-image: url("data:image/svg+xml,%3Csvg width='11' height='8' viewBox='0 0 11 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.44742 3.33543L0.0169678 4.77086L3.82685 8L10.0735 1.2675L8.46727 0L3.64465 5.19774L1.44742 3.33543Z' fill='white'/%3E%3C/svg%3E")
+                        background-position: center
+                        background-size: 10px
+                        background-repeat: no-repeat

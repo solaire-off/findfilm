@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback, useState } from "react";
 import PropTypes from "prop-types";
 import { addPropsToChildren, useDelayUnmount } from "../../Heplers";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
+import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
 
 import "./Modal.sass";
 
@@ -38,10 +39,16 @@ export const ModalRoot = ({ children, additionalClass }) => {
     }
   });
 
+  const setSelectedFilmID = useFilmInfoActionContext();
+  const closeSelectedFilm = useCallback(() => {
+    setSelectedFilmID(null);
+  });
+
   useEffect(() => {
     document.addEventListener("click", handleClickOutside, true);
     document.addEventListener("keydown", handleEscPress);
     document.querySelector("html").classList.add("overflow-hidden");
+    closeSelectedFilm();
 
     return () => {
       document.removeEventListener("click", handleClickOutside, true);
@@ -56,7 +63,7 @@ export const ModalRoot = ({ children, additionalClass }) => {
         });
       }
     };
-  }, [isDisplay, handleClickOutside, handleEscPress]);
+  }, [isDisplay, handleClickOutside, handleEscPress, closeSelectedFilm]);
 
   const childrenWithProps = addPropsToChildren(children, { closeModal });
   return (

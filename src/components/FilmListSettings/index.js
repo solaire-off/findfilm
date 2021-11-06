@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setGenre, setSort } from "../../action/films";
 import { Dropdown } from "../Dropdown";
 import { Tabs } from "../Tabs";
+import { GENRES_LIST } from "../../Constants";
 
 const mapDispatchToProps = {
   setSelectedGenre: (genre) => setGenre(genre),
@@ -17,19 +18,11 @@ export const FilmListSettings = connect(
     {
       name: "All",
     },
-    {
-      name: "Documentary",
-    },
-    {
-      name: "Comedy",
-    },
-    {
-      name: "Horror",
-    },
-    {
-      name: "Crime",
-    },
-  ];
+  ].concat(
+    GENRES_LIST.map((genre) => ({
+      name: genre,
+    }))
+  );
   const sortTypes = [
     {
       name: "release date",

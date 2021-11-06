@@ -24,7 +24,7 @@
     "jsx-a11y/label-has-associated-control": [
       2,
       {
-        "controlComponents": ["FormControl"],
+        "controlComponents": ["FormControl", "DatePicker"],
         "depth": 2
       }
     ],

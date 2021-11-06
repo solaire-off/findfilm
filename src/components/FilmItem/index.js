@@ -33,7 +33,7 @@ export const FilmItem = ({
         />
         <div className="film-card__header">
           <p className="film-card__title">{title}</p>
-          <p className="film-card__timestamp">{releaseYear}</p>
+          {releaseDate && <p className="film-card__timestamp">{releaseYear}</p>}
         </div>
         <p className="film-card__meta">{genresCaption}</p>
       </div>
@@ -45,7 +45,7 @@ FilmItem.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  releaseDate: PropTypes.string.isRequired,
+  releaseDate: PropTypes.string,
   thumbnail: PropTypes.string,
   actions: PropTypes.arrayOf(
     PropTypes.shape({
@@ -58,5 +58,6 @@ FilmItem.propTypes = {
 
 FilmItem.defaultProps = {
   thumbnail: filmCardPlaceholder,
+  releaseDate: null,
   actions: [],
 };
