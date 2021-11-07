@@ -1,22 +1,18 @@
 import React from "react";
-import { connect } from "react-redux";
-import { setGenre, setSort } from "../../action/films";
+import { useHistory } from "react-router-dom";
 import { Dropdown } from "../Dropdown";
 import { Tabs } from "../Tabs";
-import { GENRES_LIST } from "../../Constants";
+import {
+  DEFAULT_GENRE_ANY,
+  DEFAULT_SORT_FIELD,
+  GENRES_LIST,
+} from "../../Constants";
+import { useQuery } from "../../Heplers";
 
-const mapDispatchToProps = {
-  setSelectedGenre: (genre) => setGenre(genre),
-  setSelectedSort: (type) => setSort(type),
-};
-
-export const FilmListSettings = connect(
-  null,
-  mapDispatchToProps
-)(({ setSelectedGenre, setSelectedSort }) => {
+export const FilmListSettings = () => {
   const tabsItems = [
     {
-      name: "All",
+      name: DEFAULT_GENRE_ANY,
     },
   ].concat(
     GENRES_LIST.map((genre) => ({
@@ -25,6 +21,10 @@ export const FilmListSettings = connect(
   );
   const sortTypes = [
     {
+      name: "popularity",
+      value: DEFAULT_SORT_FIELD,
+    },
+    {
       name: "release date",
       value: "release_date",
     },
@@ -32,24 +32,48 @@ export const FilmListSettings = connect(
       name: "rating",
       value: "vote_average",
     },
+    {
+      name: "name",
+      value: "title",
+    },
   ];
 
+  const query = useQuery();
+  const history = useHistory();
+  const selectedSort = query.get("sortBy") || DEFAULT_SORT_FIELD;
+  const selectedGenre = query.get("genre") || DEFAULT_GENRE_ANY;
+
   const filterFilmsByGenre = (genre) => {
-    setSelectedGenre(genre === "All" ? null : genre);
+    if (genre === DEFAULT_GENRE_ANY) {
+      query.delete("genre");
+    } else {
+      query.set("genre", genre);
+    }
+    history.replace({ search: query.toString() });
   };
 
-  const sortFilmsByField = (filter) => {
-    setSelectedSort(filter);
+  const sortFilmsByField = (sortFied) => {
+    if (sortFied === DEFAULT_SORT_FIELD) {
+      query.delete("sortBy");
+    } else {
+      query.set("sortBy", sortFied);
+    }
+    history.replace({ search: query.toString() });
   };
 
   return (
     <div className="settings">
-      <Tabs list={tabsItems} callback={filterFilmsByGenre} />
+      <Tabs
+        list={tabsItems}
+        selectedTab={selectedGenre}
+        callback={filterFilmsByGenre}
+      />
       <Dropdown
         label="Sort by"
         options={sortTypes}
+        selectedValue={selectedSort}
         callback={sortFilmsByField}
       />
     </div>
   );
-});
+};

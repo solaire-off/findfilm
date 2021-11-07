@@ -2,14 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FilmInfo } from "../FilmInfo";
 import { Search } from "../Search";
-import { useFilmInfoContext } from "../../context/FilmInfoContext";
 import "./Hero.sass";
 
 import heroBanner from "../../assets/images/header.jpg";
 import heroBanner2x from "../../assets/images/header@2x.jpg";
+import { useQuery } from "../../Heplers";
 
 export const Hero = ({ title }) => {
-  const selectedFilmID = useFilmInfoContext();
+  const query = useQuery();
+  const selectedFilmID = query.get("movie");
   const additionClass = selectedFilmID ? "hero--additional" : "";
   return (
     <div className={`hero ${additionClass}`}>

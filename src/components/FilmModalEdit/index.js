@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import ReactSelect from "react-select";
+import { useLocation, useParams } from "react-router-dom";
 import { fetchFilms } from "../../action/films";
 import { FormControl } from "../FormControl";
 import { Button } from "../Button";
@@ -35,15 +36,19 @@ const FilmSchema = Yup.object().shape({
   genres: Yup.array().min(1, "At least one genre is required"),
 });
 const mapDispatchToProps = {
-  fetchFilmsInState: (count) => fetchFilms(count),
+  fetchFilmsInStore: (count, location, search) =>
+    fetchFilms(count, location, search),
 };
 
 export const FilmModalEdit = connect(
   null,
   mapDispatchToProps
-)(({ modalTitle, id, closeModal, fetchFilmsInState }) => {
+)(({ modalTitle, id, closeModal, fetchFilmsInStore }) => {
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [selectedGenres, setGenres] = useState([]);
+
+  const location = useLocation();
+  const { searchQuery } = useParams();
 
   const fetchFilmByID = (filmID) => {
     fetch(`http://localhost:4000/movies/${filmID}`)
@@ -92,8 +97,8 @@ export const FilmModalEdit = connect(
     })
       .then((response) => {
         if (response.ok) {
+          fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
           closeModal();
-          fetchFilmsInState(FETCH_FILMS_COUNT);
         }
         return response.json();
       })
@@ -287,7 +292,7 @@ export const FilmModalEdit = connect(
       </div>
       <div className="modal__footer modal__footer--mt">
         <Button
-          type="reset"
+          type="button"
           buttonStyle="btn--outline-danger"
           buttonSize="btn--lg"
           additionalClass="modal__btn font-weight-medium"
