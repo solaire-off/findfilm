@@ -7,6 +7,7 @@ const STYLES = ["form-control--light"];
 
 export const FormControl = ({
   type,
+  name,
   formControlStyle,
   placeholder,
   additionalClass,
@@ -26,16 +27,20 @@ export const FormControl = ({
     <input
       className={formControlClassName}
       type={type}
+      name={name}
       placeholder={disabled ? null : placeholder}
-      defaultValue={disabled ? null : value}
+      // defaultValue={disabled ? null : value || ""}
+      value={disabled ? null : value || ""}
       disabled={disabled}
       onChange={(e) => callback(e.target.value)}
     />
   ) : (
     <textarea
       className={`${formControlClassName} form-control--textarea`}
+      name={name}
       placeholder={disabled ? null : placeholder}
-      defaultValue={disabled ? null : value}
+      // defaultValue={disabled ? null : value || ""}
+      value={disabled ? "" : value || ""}
       disabled={disabled}
       onChange={(e) => callback(e.target.value)}
     />
@@ -44,6 +49,7 @@ export const FormControl = ({
 
 FormControl.propTypes = {
   type: PropTypes.string,
+  name: PropTypes.string,
   formControlStyle: PropTypes.string,
   placeholder: PropTypes.string,
   additionalClass: PropTypes.string,
@@ -54,6 +60,7 @@ FormControl.propTypes = {
 
 FormControl.defaultProps = {
   type: "text",
+  name: null,
   formControlStyle: null,
   placeholder: null,
   additionalClass: null,

@@ -1,13 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "../Button";
-import {
-  useFilmInfoContext,
-  useFilmInfoActionContext,
-} from "../../context/FilmInfoContext";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 
 import "./Header.sass";
+import { useQuery } from "../../Heplers";
 
 export const Header = ({ title }) => {
   const setActiveModal = useModalManagerActionContext();
@@ -20,20 +18,23 @@ export const Header = ({ title }) => {
     });
   };
 
-  const selectedFilmID = useFilmInfoContext();
-  const setSelectedFilmID = useFilmInfoActionContext();
+  const query = useQuery();
+  const history = useHistory();
+
+  const selectedFilmID = query.get("movie");
   const unsetSelectedFilm = () => {
-    setSelectedFilmID(null);
+    query.delete("movie");
+    history.replace({ search: query.toString() });
   };
   return (
     <>
       <header className="header">
         <div className="container">
           <div className="header__in">
-            <p className="header__title">
+            <Link className="header__title" to="/search">
               <span className="font-weight-black">{title[0]}</span>
               {title[1]}
-            </p>
+            </Link>
             {!selectedFilmID ? (
               <Button
                 onClick={toggleAddModal}

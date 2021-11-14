@@ -1,10 +1,12 @@
 import {
   useState,
   useEffect,
+  useMemo,
   Children,
   isValidElement,
   cloneElement,
 } from "react";
+import { useLocation } from "react-router-dom";
 
 export const useDelayUnmount = (isMounted, delayTime) => {
   const [showDiv, setShowDiv] = useState(false);
@@ -40,4 +42,9 @@ export const minutesToHoursAndMinutes = (n) => {
   const minutes = (hours - rhours) * 60;
   const rminutes = Math.round(minutes);
   return `${rhours}h ${rminutes}min`;
+};
+
+export const useQuery = () => {
+  const location = useLocation();
+  return useMemo(() => new URLSearchParams(location.search), [location]);
 };

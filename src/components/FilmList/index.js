@@ -1,25 +1,30 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { useHistory, useLocation, useParams } from "react-router-dom";
 import { FilmItem } from "../FilmItem";
-import { useFilmInfoActionContext } from "../../context/FilmInfoContext";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 import { fetchFilms } from "../../action/films";
 import { FETCH_FILMS_COUNT } from "../../Constants";
+import { Button } from "../Button";
 
 const mapStateToProps = (store) => ({
   filmsList: store.films.list,
-  filmsSelectedGenre: store.films.genre,
-  filmsSelectedSort: store.films.sort,
 });
 
 const mapDispatchToProps = {
-  fetchFilmsInState: (count) => fetchFilms(count),
+  fetchFilmsInStore: (count, location, search) =>
+    fetchFilms(count, location, search),
 };
 
 export const FilmList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(({ filmsList, fetchFilmsInState, filmsSelectedGenre, filmsSelectedSort }) => {
+)(({ filmsList, fetchFilmsInStore }) => {
+  const history = useHistory();
+  const location = useLocation();
+  const query = new URLSearchParams(location.search);
+  const { searchQuery } = useParams();
+
   const setActiveModal = useModalManagerActionContext();
 
   const toggleAddModal = (id) => {
@@ -36,7 +41,7 @@ export const FilmList = connect(
     fetch(`http://localhost:4000/movies/${id}`, {
       method: "DELETE",
     }).then(() => {
-      fetchFilmsInState(FETCH_FILMS_COUNT);
+      fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
     });
   };
 
@@ -65,12 +70,22 @@ export const FilmList = connect(
   ];
 
   useEffect(() => {
-    fetchFilmsInState(FETCH_FILMS_COUNT);
-  }, [filmsSelectedGenre, filmsSelectedSort]);
+    fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
+  }, [location, searchQuery]);
 
   const count = filmsList ? filmsList.length : 0;
 
-  const setSelectedFilm = useFilmInfoActionContext();
+  const setSelectedFilm = (id) => {
+    query.set("movie", id);
+    history.replace({ search: query.toString() });
+  };
+
+  const clearSearch = () => {
+    history.replace({
+      pathname: "/search",
+      search: query.toString(),
+    });
+  };
 
   return (
     <>
@@ -78,7 +93,7 @@ export const FilmList = connect(
         <span className="font-weight-semibold"> {count} </span>
         movies found
       </p>
-      {count && (
+      {count > 0 ? (
         <div className="row">
           {filmsList.map((item) => (
             <div key={item.title} className="row__item">
@@ -94,6 +109,10 @@ export const FilmList = connect(
             </div>
           ))}
         </div>
+      ) : (
+        <Button onClick={clearSearch} buttonStyle="btn--outline-danger">
+          Clear search
+        </Button>
       )}
     </>
   );
