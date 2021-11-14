@@ -1,5 +1,6 @@
 import { DEFAULT_SORT_FIELD } from "../Constants";
 import { SET_FILMS } from "./action-types";
+import { API_ROOT } from "../Constants";
 
 export const setFilms = (list) => ({
   type: SET_FILMS,
@@ -12,7 +13,7 @@ export const fetchFilms = (count, location, searchQuery) => {
     const sort = query?.get("sortBy") || DEFAULT_SORT_FIELD;
     const sortOrder = sort === "title" ? "asc" : "desc";
     const genre = query?.get("genre");
-    let url = `http://localhost:4000/movies?limit=${count}&sortBy=${sort}&sortOrder=${sortOrder}`;
+    let url = `${API_ROOT}/movies?limit=${count}&sortBy=${sort}&sortOrder=${sortOrder}`;
     if (genre) {
       url += `&filter=${genre}`;
     }

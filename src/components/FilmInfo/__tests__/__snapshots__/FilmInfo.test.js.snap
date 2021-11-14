@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render 1`] = `
+<body>
+  <div>
+    <div
+      class="film-article"
+    >
+      <div
+        class="film-article__in"
+      >
+        <img
+          alt="La La Land"
+          class="film-article__thumbnail"
+          src="https://image.tmdb.org/t/p/w500/ylXCdC106IKiarftHkcacasaAcb.jpg"
+        />
+        <div
+          class="film-article__content"
+        >
+          <div
+            class="film-article__header"
+          >
+            <p
+              class="film-article__title"
+            >
+              <span>
+                La La Land
+              </span>
+              <span
+                class="film-article__rating"
+              >
+                7.9
+              </span>
+            </p>
+            <p
+              class="film-article__subtitle"
+            >
+              Comedy, Drama, Romance
+            </p>
+          </div>
+          <p
+            class="film-article__meta-list"
+          >
+            <span
+              class="film-article__meta"
+            >
+              2016
+            </span>
+            <span
+              class="film-article__meta"
+            >
+              2h 8min
+            </span>
+          </p>
+          <p
+            class="film-article__text"
+          >
+            Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+`;

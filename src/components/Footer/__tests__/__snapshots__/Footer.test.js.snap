@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render 1`] = `
+<DocumentFragment>
+  <footer
+    class="footer"
+  >
+    <p
+      class="footer__title"
+    >
+      <span
+        class="font-weight-black"
+      >
+        netflix
+      </span>
+      roulette
+    </p>
+  </footer>
+</DocumentFragment>
+`;

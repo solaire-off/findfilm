@@ -1,6 +1,6 @@
 import { SET_FILMS } from "../action/action-types";
 
-const initialState = {
+export const initialState = {
   list: [],
 };
 

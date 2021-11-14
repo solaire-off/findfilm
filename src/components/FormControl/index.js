@@ -29,8 +29,7 @@ export const FormControl = ({
       type={type}
       name={name}
       placeholder={disabled ? null : placeholder}
-      // defaultValue={disabled ? null : value || ""}
-      value={disabled ? null : value || ""}
+      value={disabled ? "" : value || ""}
       disabled={disabled}
       onChange={(e) => callback(e.target.value)}
     />
@@ -39,7 +38,6 @@ export const FormControl = ({
       className={`${formControlClassName} form-control--textarea`}
       name={name}
       placeholder={disabled ? null : placeholder}
-      // defaultValue={disabled ? null : value || ""}
       value={disabled ? "" : value || ""}
       disabled={disabled}
       onChange={(e) => callback(e.target.value)}
@@ -64,7 +62,7 @@ FormControl.defaultProps = {
   formControlStyle: null,
   placeholder: null,
   additionalClass: null,
-  value: null,
+  value: "",
   disabled: false,
   callback: () => {},
 };

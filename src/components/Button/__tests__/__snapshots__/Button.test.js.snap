@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render with custom style and size classes 1`] = `
+<DocumentFragment>
+  <button
+    class="btn btn--outline-primary btn--lg custom-btn-class"
+    type="button"
+  >
+    + Add Movie
+  </button>
+</DocumentFragment>
+`;
+
+exports[`Current render with default style and size 1`] = `
+<DocumentFragment>
+  <button
+    class="btn btn--primary  "
+    type="button"
+  >
+    + Add Movie
+  </button>
+</DocumentFragment>
+`;

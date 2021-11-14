@@ -11,16 +11,15 @@ import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ModalManager } from "./components/ModalManager";
 import { ModalManagerProvider } from "./context/ModalManagerContext";
 import { store } from "./store";
+import { SITE_NAME } from "./Constants";
 import "./App.sass";
 
 const App = () => {
-  const siteName = ["netflix", "roulette"];
-
   return (
     <HashRouter>
       <Provider store={store}>
         <ModalManagerProvider>
-          <Header title={siteName} />
+          <Header title={SITE_NAME} />
           <Switch>
             <Route exact path="/">
               <Redirect to="/search" />
@@ -40,7 +39,7 @@ const App = () => {
             </Route>
             <Route component={NotFoundPage} />
           </Switch>
-          <Footer title={siteName} />
+          <Footer title={SITE_NAME} />
           <ModalManager />
         </ModalManagerProvider>
       </Provider>

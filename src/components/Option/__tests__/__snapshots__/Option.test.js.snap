@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render when check prop 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="css-o8533i-Option"
+    >
+      <input
+        checked=""
+        type="checkbox"
+      />
+      <label>
+        Some option
+      </label>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Current render when uncheck prop 1`] = `
+<DocumentFragment>
+  <div>
+    <div
+      class="css-o8533i-Option"
+    >
+      <input
+        type="checkbox"
+      />
+      <label>
+        Some option
+      </label>
+    </div>
+  </div>
+</DocumentFragment>
+`;

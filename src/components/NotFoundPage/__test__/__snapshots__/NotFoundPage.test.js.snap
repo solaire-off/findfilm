@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render 1`] = `
+<DocumentFragment>
+  <div
+    class="fullpage text-center"
+  >
+    <h1
+      class="fullpage__title"
+    >
+      Page not found
+    </h1>
+    <a
+      href="/"
+    >
+      <button
+        class="btn btn--outline-danger  "
+        type="button"
+      >
+        Homepage
+      </button>
+    </a>
+  </div>
+</DocumentFragment>
+`;
