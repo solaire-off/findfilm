@@ -25,3 +25,7 @@ Runs tests.
 ### `npm run test:cover`
 
 Runs tests, shows the percentage of coverage, and creates a "coverage" folder with detailed coverage information.
+
+### `npm run cypress`
+
+Run cypress for make E2E tests.
