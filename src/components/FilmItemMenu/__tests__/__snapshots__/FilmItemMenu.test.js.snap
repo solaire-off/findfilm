@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render 1`] = `
+<body>
+  <div>
+    <div
+      class="film-card__menu null"
+    >
+      <button
+        aria-label="Film menu"
+        class="film-card__menu-toggle"
+        type="button"
+      />
+      <div
+        class="film-card__actions"
+      >
+        <button
+          aria-label="Close"
+          class="film-card__actions-toggle"
+          type="button"
+        />
+        <button
+          class="film-card__actions-item"
+          type="button"
+        >
+          Edit
+        </button>
+        <button
+          class="film-card__actions-item"
+          type="button"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+`;

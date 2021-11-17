@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render (input) with custom style and additional classes 1`] = `
+<DocumentFragment>
+  <input
+    class="form-control form-control--light example-additional-class"
+    placeholder="Example placeholder"
+    type="text"
+    value="Example value"
+  />
+</DocumentFragment>
+`;
+
+exports[`Current render (input) with default style and size 1`] = `
+<DocumentFragment>
+  <input
+    class="form-control  "
+    placeholder="Example placeholder"
+    type="text"
+    value="Example value"
+  />
+</DocumentFragment>
+`;
+
+exports[`Current render (textarea) with default style and size 1`] = `
+<DocumentFragment>
+  <textarea
+    class="form-control   form-control--textarea"
+    placeholder="Example placeholder"
+  >
+    Example value
+  </textarea>
+</DocumentFragment>
+`;
+
+exports[`Current render when disabled(input) 1`] = `
+<DocumentFragment>
+  <input
+    class="form-control  "
+    disabled=""
+    type="text"
+    value=""
+  />
+</DocumentFragment>
+`;
+
+exports[`Current render when disabled(textarea) 1`] = `
+<DocumentFragment>
+  <textarea
+    class="form-control   form-control--textarea"
+    disabled=""
+  />
+</DocumentFragment>
+`;

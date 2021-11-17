@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import DatePicker from "react-datepicker";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import ReactSelect from "react-select";
 import { useLocation, useParams } from "react-router-dom";
 import { fetchFilms } from "../../action/films";
@@ -11,99 +10,49 @@ import { FormControl } from "../FormControl";
 import { Button } from "../Button";
 import { FETCH_FILMS_COUNT, GENRES_LIST } from "../../Constants";
 import { Option } from "../Option";
+import { FilmSchema } from "../../schema";
+import { fetchFilmByID } from "../../api";
 import "./FilmModal.sass";
 
-const FilmSchema = Yup.object().shape({
-  title: Yup.string()
-    .min(2, "The minimum length of the title is 2 characters.")
-    .required("Required field."),
-  vote_average: Yup.number()
-    .nullable()
-    .typeError("Rating is required number.")
-    .min(1, "The minimum rating of the film is 1.")
-    .max(10, "The maximum rating of the film is 10."),
-  release_date: Yup.date().nullable().default(null),
-  poster_path: Yup.string()
-    .url("Movie url must be a valid url.")
-    .required("Required field."),
-  overview: Yup.string()
-    .min(10, "Minimum length of the overview is 10 characters.")
-    .required("Required field."),
-  runtime: Yup.number()
-    .typeError("Runtime must be a number.")
-    .min(1, "Minimum length of runtime is 1 minute.")
-    .required("Required field."),
-  genres: Yup.array().min(1, "At least one genre is required"),
-});
 const mapDispatchToProps = {
   fetchFilmsInStore: (count, location, search) =>
     fetchFilms(count, location, search),
 };
 
-export const FilmModalEdit = connect(
-  null,
-  mapDispatchToProps
-)(({ modalTitle, id, closeModal, fetchFilmsInStore }) => {
+export const FilmModalEdit = ({
+  modalTitle,
+  id,
+  closeModal,
+  fetchFilmsInStore,
+  sendFilmData,
+}) => {
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [selectedGenres, setGenres] = useState([]);
 
   const location = useLocation();
   const { searchQuery } = useParams();
 
-  const fetchFilmByID = (filmID) => {
-    fetch(`http://localhost:4000/movies/${filmID}`)
-      .then((response) => response.json())
-      .then((filmData) => {
-        setSelectedFilm(filmData);
-        setGenres(
-          filmData.genres.map((genre) => ({
-            value: genre,
-            label: genre,
-          }))
-        );
-      });
+  const getFilm = (id) => {
+    fetchFilmByID(id, (filmData) => {
+      setSelectedFilm(filmData);
+      setGenres(
+        filmData.genres.map((genre) => ({
+          value: genre,
+          label: genre,
+        }))
+      );
+    });
   };
 
   useEffect(() => {
     if (id) {
-      fetchFilmByID(id);
+      getFilm(id);
     }
   }, [id]);
 
-  const sendFilmData = (values) => {
-    const fetchMethod = id ? "PUT" : "POST";
-    const body = {
-      title: values.title,
-      poster_path: values.poster_path,
-      genres: values.genres,
-      runtime: parseInt(values.runtime, 10),
-      overview: values.overview,
-    };
-    if (values.vote_average) {
-      body.vote_average = parseFloat(values.vote_average);
-    }
-    if (values.release_date) {
-      body.release_date = values.release_date.toLocaleDateString("en-CA");
-    }
-    if (id) {
-      body.id = id;
-    }
-    fetch("http://localhost:4000/movies", {
-      method: fetchMethod,
-      body: JSON.stringify(body),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (response.ok) {
-          fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
-          closeModal();
-        }
-        return response.json();
-      })
-      // eslint-disable-next-line no-console
-      .then((json) => console.log("Response:", JSON.stringify(json)));
+  const formSuccessSend = () => {
+    fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
+    closeModal();
   };
 
   const formik = useFormik({
@@ -119,7 +68,7 @@ export const FilmModalEdit = connect(
       overview: selectedFilm?.overview,
     },
     validationSchema: FilmSchema,
-    onSubmit: sendFilmData,
+    onSubmit: (values) => sendFilmData(values, id, formSuccessSend),
     enableReinitialize: true,
   });
 
@@ -311,11 +260,17 @@ export const FilmModalEdit = connect(
       </div>
     </form>
   );
-});
+};
+
+export const FilmModalEditContainer = connect(
+  null,
+  mapDispatchToProps
+)(FilmModalEdit);
 
 FilmModalEdit.propTypes = {
   modalTitle: PropTypes.string.isRequired,
   id: PropTypes.number,
+  sendFilmData: PropTypes.func.isRequired,
   closeModal: PropTypes.func,
 };
 

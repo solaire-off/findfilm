@@ -2,7 +2,7 @@
 import React from "react";
 import { useModalManagerContext } from "../../context/ModalManagerContext";
 import { ModalRoot } from "../ModalRoot";
-import { FilmModalEdit } from "../FilmModalEdit";
+import { FilmModalEditContainer } from "../FilmModalEdit";
 import { ConfirmModal } from "../ConfirmModal";
 
 export const ModalManager = () => {
@@ -11,7 +11,7 @@ export const ModalManager = () => {
     case "ADD_FILM":
       return (
         <ModalRoot additionalClass="film-modal">
-          <FilmModalEdit {...activeModal.props} />
+          <FilmModalEditContainer {...activeModal.props} />
         </ModalRoot>
       );
     case "CONFIRMATION":

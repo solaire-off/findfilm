@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Correct render 1`] = `
+<DocumentFragment>
+  <div
+    class="modal__header"
+  >
+    <p
+      class="modal__title"
+    >
+      Confirm title
+    </p>
+    <button
+      aria-label="Close"
+      class="modal__close"
+      type="button"
+    />
+  </div>
+  <div
+    class="modal__body"
+  >
+    <div
+      class="modal__text"
+    >
+      <p>
+        Confirm descr
+      </p>
+    </div>
+  </div>
+  <div
+    class="modal__footer modal__footer--mt-sm"
+  >
+    <button
+      class="btn btn--primary btn--lg modal__btn font-weight-medium"
+      type="button"
+    >
+      Confirm
+    </button>
+  </div>
+</DocumentFragment>
+`;

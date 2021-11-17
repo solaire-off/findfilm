@@ -61,9 +61,12 @@ export const ModalRoot = ({ children, additionalClass }) => {
   const childrenWithProps = addPropsToChildren(children, { closeModal });
   return (
     isDisplayWithDelayUnmount && (
-      <div className={`modal ${additionalClass} ${checkIsDisplay}`}>
-        <div className="modal__blocker" />
-        <div ref={ref} className="modal__content">
+      <div
+        role="dialog"
+        className={`modal ${additionalClass} ${checkIsDisplay}`}
+      >
+        <div className="modal__blocker"></div>
+        <div role="document" ref={ref} className="modal__content">
           {childrenWithProps}
         </div>
       </div>

@@ -6,6 +6,7 @@ import {
   DEFAULT_GENRE_ANY,
   DEFAULT_SORT_FIELD,
   GENRES_LIST,
+  SORT_TYPES,
 } from "../../Constants";
 import { useQuery } from "../../Heplers";
 
@@ -19,24 +20,6 @@ export const FilmListSettings = () => {
       name: genre,
     }))
   );
-  const sortTypes = [
-    {
-      name: "popularity",
-      value: DEFAULT_SORT_FIELD,
-    },
-    {
-      name: "release date",
-      value: "release_date",
-    },
-    {
-      name: "rating",
-      value: "vote_average",
-    },
-    {
-      name: "name",
-      value: "title",
-    },
-  ];
 
   const query = useQuery();
   const history = useHistory();
@@ -70,7 +53,7 @@ export const FilmListSettings = () => {
       />
       <Dropdown
         label="Sort by"
-        options={sortTypes}
+        options={SORT_TYPES}
         selectedValue={selectedSort}
         callback={sortFilmsByField}
       />

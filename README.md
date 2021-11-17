@@ -17,3 +17,15 @@ The page will reload when you make changes.
 
 Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
+
+### `npm run test`
+
+Runs tests.
+
+### `npm run test:cover`
+
+Runs tests, shows the percentage of coverage, and creates a "coverage" folder with detailed coverage information.
+
+### `npm run cypress`
+
+Run cypress for make E2E tests.

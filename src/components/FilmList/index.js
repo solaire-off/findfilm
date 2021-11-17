@@ -6,6 +6,7 @@ import { useModalManagerActionContext } from "../../context/ModalManagerContext"
 import { fetchFilms } from "../../action/films";
 import { FETCH_FILMS_COUNT } from "../../Constants";
 import { Button } from "../Button";
+import { sendFilmData } from "../../api";
 
 const mapStateToProps = (store) => ({
   filmsList: store.films.list,
@@ -33,6 +34,7 @@ export const FilmList = connect(
       props: {
         modalTitle: "Edit movie",
         id,
+        sendFilmData,
       },
     });
   };

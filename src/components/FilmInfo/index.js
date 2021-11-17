@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { ImageFallback } from "../ImageFallback";
 import { minutesToHoursAndMinutes } from "../../Heplers";
 import filmCardPlaceholder from "../../assets/images/placeholder_netflix.jpg";
-
+import { fetchFilmByID } from "../../api";
 import "./FilmInfo.sass";
 
 export const FilmInfo = ({ id }) => {
@@ -13,14 +13,14 @@ export const FilmInfo = ({ id }) => {
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
   };
 
-  const fetchFilmByID = (filmID) => {
-    fetch(`http://localhost:4000/movies/${filmID}`)
-      .then((response) => response.json())
-      .then((filmData) => setFilm(filmData));
+  const getFilm = (id) => {
+    fetchFilmByID(id, (filmData) => {
+      setFilm(filmData);
+    });
   };
 
   useEffect(() => {
-    fetchFilmByID(id);
+    getFilm(id);
     scrollToTop();
   }, [id]);
 

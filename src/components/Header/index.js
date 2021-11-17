@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 import { Link, useHistory } from "react-router-dom";
 import { Button } from "../Button";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
-
-import "./Header.sass";
+import { sendFilmData } from "../../api";
 import { useQuery } from "../../Heplers";
+import "./Header.sass";
 
 export const Header = ({ title }) => {
   const setActiveModal = useModalManagerActionContext();
@@ -14,6 +14,7 @@ export const Header = ({ title }) => {
       type: "ADD_FILM",
       props: {
         modalTitle: "Add movie",
+        sendFilmData,
       },
     });
   };
@@ -48,6 +49,7 @@ export const Header = ({ title }) => {
                 onClick={unsetSelectedFilm}
                 type="button"
                 className="icon-btn"
+                aria-label="Close film info"
               >
                 <svg
                   className="icon-btn__image"

@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Current render 1`] = `
+<DocumentFragment>
+  <label
+    class="dropdown-wrap"
+  >
+    <p
+      class="dropdown-wrap__label"
+    >
+      Sort by
+    </p>
+    <select
+      class="dropdown"
+    >
+      <option
+        value="vote_count"
+      >
+        popularity
+      </option>
+      <option
+        value="release_date"
+      >
+        release date
+      </option>
+      <option
+        value="vote_average"
+      >
+        rating
+      </option>
+      <option
+        value="title"
+      >
+        name
+      </option>
+    </select>
+  </label>
+</DocumentFragment>
+`;

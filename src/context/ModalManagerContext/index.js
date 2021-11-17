@@ -1,8 +1,8 @@
 import React, { createContext, useContext, useState } from "react";
 import PropTypes from "prop-types";
 
-const ModalManagerContext = createContext();
-const ModalManagerActionContext = createContext();
+export const ModalManagerContext = createContext();
+export const ModalManagerActionContext = createContext();
 
 export const useModalManagerContext = () => useContext(ModalManagerContext);
 export const useModalManagerActionContext = () =>

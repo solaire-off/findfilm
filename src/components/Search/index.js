@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, generatePath } from "react-router-dom";
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams, useHistory, generatePath } from "react-router-dom";
 import { useQuery } from "../../Heplers";
 import { Button } from "../Button";
 import { FormControl } from "../FormControl";
