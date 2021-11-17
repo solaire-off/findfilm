@@ -41,5 +41,5 @@ it("Callback onClick work", () => {
   );
 
   userEvent.click(screen.getByText(buttonText));
-  expect(mockCallback.mock.calls.length).toBe(1);
+  expect(mockCallback).toBeCalledTimes(1);
 });

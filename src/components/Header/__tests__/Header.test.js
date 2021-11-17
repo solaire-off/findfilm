@@ -60,7 +60,7 @@ it("Work open modal", async () => {
     })
   );
 
-  expect(mockOpenModal.mock.calls.length).toEqual(1);
+  expect(mockOpenModal).toBeCalledTimes(1);
 });
 
 it("Change search params in history for close info about film", async () => {
@@ -77,5 +77,5 @@ it("Change search params in history for close info about film", async () => {
 
   userEvent.click(screen.getByLabelText(/close film info/i));
 
-  expect(mockHistoryReplace.mock.calls.length).toEqual(1);
+  expect(mockHistoryReplace).toBeCalledTimes(1);
 });

@@ -28,5 +28,5 @@ it("Callback onClick work", () => {
   );
 
   userEvent.click(screen.getByText("Another tab"));
-  expect(mockCallback.mock.calls.length).toBe(1);
+  expect(mockCallback).toBeCalledTimes(1);
 });

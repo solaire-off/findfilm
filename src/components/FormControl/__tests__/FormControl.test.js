@@ -53,7 +53,7 @@ it("Callback onChange work (textarea)", () => {
     />
   );
   userEvent.type(screen.getByRole("textbox"), captionToType);
-  expect(mockCallback.mock.calls.length).toBe(captionToType.length);
+  expect(mockCallback).toBeCalledTimes(captionToType.length);
 });
 
 it("Callback onChange work (input)", () => {
@@ -67,7 +67,7 @@ it("Callback onChange work (input)", () => {
     />
   );
   userEvent.type(screen.getByRole("textbox"), captionToType);
-  expect(mockCallback.mock.calls.length).toBe(captionToType.length);
+  expect(mockCallback).toBeCalledTimes(captionToType.length);
 });
 
 it("Current render when disabled(textarea)", () => {

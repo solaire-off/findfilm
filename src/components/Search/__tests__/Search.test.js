@@ -77,7 +77,7 @@ it("Search form call history replace with value when send", async () => {
   userEvent.type(input, nextSearchValue);
   userEvent.click(button);
 
-  expect(mockHistoryReplace.mock.calls.length).toEqual(1);
+  expect(mockHistoryReplace).toBeCalledTimes(1);
 });
 
 it("Search form call history replace without value when send", async () => {
@@ -95,5 +95,5 @@ it("Search form call history replace without value when send", async () => {
   userEvent.clear(input);
   userEvent.click(button);
 
-  expect(mockHistoryReplace.mock.calls.length).toEqual(1);
+  expect(mockHistoryReplace).toBeCalledTimes(1);
 });

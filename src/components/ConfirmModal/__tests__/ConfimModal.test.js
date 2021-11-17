@@ -30,6 +30,6 @@ it("Work confim callback", () => {
 
   userEvent.click(screen.getByText(/Confirm/i, { selector: "button" }));
 
-  expect(mockCallback.mock.calls.length).toBe(1);
-  expect(mockClose.mock.calls.length).toBe(1);
+  expect(mockCallback).toBeCalledTimes(1);
+  expect(mockClose).toBeCalledTimes(1);
 });

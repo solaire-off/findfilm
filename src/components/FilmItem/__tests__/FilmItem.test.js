@@ -38,5 +38,5 @@ it("Current render", async () => {
 
   userEvent.click(screen.getByText(EXAMPLE_FILM.title));
 
-  expect(mockOnClick.mock.calls.length).toEqual(1);
+  expect(mockOnClick).toBeCalledTimes(1);
 });

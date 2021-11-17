@@ -30,5 +30,5 @@ it("Callback onClick work", () => {
   );
 
   userEvent.click(screen.getByText(TabCaption));
-  expect(mockCallback.mock.calls.length).toBe(1);
+  expect(mockCallback).toBeCalledTimes(1);
 });

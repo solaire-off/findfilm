@@ -34,6 +34,6 @@ it("Menu items callbacks is work", async () => {
   });
 
   filmCardActions.forEach((item) => {
-    expect(item.callback.mock.calls.length).toEqual(1);
+    expect(item.callback).toBeCalledTimes(1);
   });
 });
