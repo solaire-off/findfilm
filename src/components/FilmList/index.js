@@ -6,7 +6,7 @@ import { useModalManagerActionContext } from "../../context/ModalManagerContext"
 import { fetchFilms } from "../../action/films";
 import { FETCH_FILMS_COUNT } from "../../Constants";
 import { Button } from "../Button";
-import { sendFilmData } from "../../api";
+import { sendFilmData, deleteFilmByID } from "../../api";
 
 const mapStateToProps = (store) => ({
   filmsList: store.films.list,
@@ -40,9 +40,7 @@ export const FilmList = connect(
   };
 
   const deleteMovieAndRefetch = (id) => {
-    fetch(`http://localhost:4000/movies/${id}`, {
-      method: "DELETE",
-    }).then(() => {
+    deleteFilmByID(id, () => {
       fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
     });
   };

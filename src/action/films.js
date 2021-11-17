@@ -1,6 +1,7 @@
 import { DEFAULT_SORT_FIELD } from "../Constants";
 import { SET_FILMS } from "./action-types";
 import { API_ROOT } from "../Constants";
+import fetch from "isomorphic-fetch";
 
 export const setFilms = (list) => ({
   type: SET_FILMS,
