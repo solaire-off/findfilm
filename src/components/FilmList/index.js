@@ -75,11 +75,6 @@ export const FilmList = connect(
 
   const count = filmsList ? filmsList.length : 0;
 
-  const setSelectedFilm = (id) => {
-    query.set("movie", id);
-    history.replace({ search: query.toString() });
-  };
-
   const clearSearch = () => {
     history.replace({
       pathname: "/search",
@@ -104,7 +99,13 @@ export const FilmList = connect(
                 thumbnail={item.poster_path}
                 releaseDate={item.release_date}
                 actions={filmCardActions}
-                onClick={setSelectedFilm}
+                link={{
+                  pathname: location.pathname,
+                  search: (() => {
+                    query.set("movie", item.id);
+                    return query.toString();
+                  })(),
+                }}
               />
             </div>
           ))}

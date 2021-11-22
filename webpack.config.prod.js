@@ -10,6 +10,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
+      filename: "client.html",
       template: path.join(__dirname, "src", "index.html"),
       minify: {
         collapseWhitespace: true,

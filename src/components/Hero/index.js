@@ -12,13 +12,14 @@ export const Hero = ({ title }) => {
   const query = useQuery();
   const selectedFilmID = query.get("movie");
   const additionClass = selectedFilmID ? "hero--additional" : "";
+  const rootUrl = heroBanner.includes("http") ? "" : "/";
   return (
     <div className={`hero ${additionClass}`}>
       <picture>
         <img
           className="hero__bg"
-          srcSet={`${heroBanner} 1x, ${heroBanner2x} 2x`}
-          src={heroBanner}
+          srcSet={`${rootUrl}${heroBanner} 1x, ${rootUrl}${heroBanner2x} 2x`}
+          src={`${rootUrl}${heroBanner}`}
           alt="Film List"
         />
       </picture>

@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "../Button";
 import { useModalManagerActionContext } from "../../context/ModalManagerContext";
 import { sendFilmData } from "../../api";
@@ -20,13 +20,10 @@ export const Header = ({ title }) => {
   };
 
   const query = useQuery();
-  const history = useHistory();
+  const location = useLocation();
 
   const selectedFilmID = query.get("movie");
-  const unsetSelectedFilm = () => {
-    query.delete("movie");
-    history.replace({ search: query.toString() });
-  };
+
   return (
     <>
       <header className="header">
@@ -45,8 +42,14 @@ export const Header = ({ title }) => {
                 + Add Movie
               </Button>
             ) : (
-              <button
-                onClick={unsetSelectedFilm}
+              <Link
+                to={{
+                  pathname: location.pathname,
+                  search: (() => {
+                    query.delete("movie");
+                    return query.toString();
+                  })(),
+                }}
                 type="button"
                 className="icon-btn"
                 aria-label="Close film info"
@@ -73,7 +76,7 @@ export const Header = ({ title }) => {
                     strokeLinecap="square"
                   />
                 </svg>
-              </button>
+              </Link>
             )}
           </div>
         </div>

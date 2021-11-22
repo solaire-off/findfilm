@@ -18,6 +18,10 @@ The page will reload when you make changes.
 Builds the app for production to the `dist` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
+### `npm run build:server`
+
+Builds server side part for production to the `dist/server` folder.
+
 ### `npm run test`
 
 Runs tests.
@@ -29,3 +33,9 @@ Runs tests, shows the percentage of coverage, and creates a "coverage" folder wi
 ### `npm run cypress`
 
 Run cypress for make E2E tests.
+
+## SSR
+
+Before starting the server, you need to run `npm run build` and `npm run build:server`.
+
+Then run `npm run server`.

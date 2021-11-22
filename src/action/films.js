@@ -21,7 +21,7 @@ export const fetchFilms = (count, location, searchQuery) => {
     if (searchQuery) {
       url += `&search=${searchQuery}&searchBy=title`;
     }
-    fetch(url)
+    return fetch(url)
       .then((response) => response.json())
       .then((list) => dispatch(setFilms(list.data)));
   };

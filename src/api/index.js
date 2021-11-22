@@ -2,7 +2,7 @@ import { API_ROOT } from "../Constants";
 import fetch from "isomorphic-fetch";
 
 export const fetchFilmByID = (filmID, callback) => {
-  fetch(`${API_ROOT}/movies/${filmID}`)
+  return fetch(`${API_ROOT}/movies/${filmID}`)
     .then((response) => response.json())
     .then((filmData) => {
       if (callback) {
