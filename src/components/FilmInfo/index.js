@@ -23,8 +23,10 @@ export const FilmInfo = ({ id }) => {
   };
 
   useEffect(() => {
-    getFilm(id);
-    scrollToTop();
+    if (id) {
+      getFilm(id);
+      scrollToTop();
+    }
   }, [id]);
 
   const filmDate = film?.release_date;
@@ -71,5 +73,9 @@ export const FilmInfo = ({ id }) => {
 };
 
 FilmInfo.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
+};
+
+FilmInfo.defaultProps = {
+  id: null,
 };

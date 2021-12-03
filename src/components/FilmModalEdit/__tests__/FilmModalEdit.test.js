@@ -23,7 +23,7 @@ it("Current render when 'add' mode", async () => {
   expect(document.body).toMatchSnapshot();
 });
 
-it("Current render when 'edit' mode", async () => {
+it("Current render 'edit' mode", async () => {
   await act(async () => {
     render(
       <MemoryRouter initialentries={[{ pathname: "/search" }]}>

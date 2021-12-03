@@ -54,7 +54,7 @@ FilmItem.propTypes = {
       callback: PropTypes.func.isRequired,
     })
   ),
-  link: PropTypes.object.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 FilmItem.defaultProps = {

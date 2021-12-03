@@ -24,8 +24,9 @@ exports[`Current render 1`] = `
           />
         </div>
       </div>
-      <div
+      <a
         class="film-card__in"
+        href="/search?movie=313369"
       >
         <img
           alt="La La Land"
@@ -51,7 +52,7 @@ exports[`Current render 1`] = `
         >
           Comedy, Drama, Romance
         </p>
-      </div>
+      </a>
     </div>
   </div>
 </body>

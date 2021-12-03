@@ -1,5 +1,5 @@
 import { API_ROOT } from "../Constants";
-import fetch from "isomorphic-fetch";
+import "isomorphic-fetch";
 
 export const fetchFilmByID = (filmID, callback) => {
   return fetch(`${API_ROOT}/movies/${filmID}`)

@@ -59,9 +59,10 @@ exports[`Current render header when open film info 1`] = `
             </span>
             roulette
           </a>
-          <button
+          <a
             aria-label="Close film info"
             class="icon-btn"
+            href="/search"
             type="button"
           >
             <svg
@@ -86,7 +87,7 @@ exports[`Current render header when open film info 1`] = `
                 stroke-width="2"
               />
             </svg>
-          </button>
+          </a>
         </div>
       </div>
     </header>

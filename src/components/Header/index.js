@@ -24,6 +24,9 @@ export const Header = ({ title }) => {
 
   const selectedFilmID = query.get("movie");
 
+  query.delete("movie");
+  const searchParamWithourMovie = query.toString();
+
   return (
     <>
       <header className="header">
@@ -45,10 +48,7 @@ export const Header = ({ title }) => {
               <Link
                 to={{
                   pathname: location.pathname,
-                  search: (() => {
-                    query.delete("movie");
-                    return query.toString();
-                  })(),
+                  search: searchParamWithourMovie,
                 }}
                 type="button"
                 className="icon-btn"

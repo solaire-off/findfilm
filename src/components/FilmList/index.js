@@ -82,6 +82,9 @@ export const FilmList = connect(
     });
   };
 
+  query.delete("movie");
+  const queryWithourMovie = query.toString();
+
   return (
     <>
       <p className="notification-caption">
@@ -99,13 +102,9 @@ export const FilmList = connect(
                 thumbnail={item.poster_path}
                 releaseDate={item.release_date}
                 actions={filmCardActions}
-                link={{
-                  pathname: location.pathname,
-                  search: (() => {
-                    query.set("movie", item.id);
-                    return query.toString();
-                  })(),
-                }}
+                link={`${location.pathname}?${queryWithourMovie}${
+                  queryWithourMovie ? "&" : ""
+                }movie=${item.id}`}
               />
             </div>
           ))}
