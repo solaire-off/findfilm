@@ -1,13 +1,26 @@
 import { API_ROOT } from "../Constants";
+import "isomorphic-fetch";
 
 export const fetchFilmByID = (filmID, callback) => {
-  fetch(`${API_ROOT}/movies/${filmID}`)
+  return fetch(`${API_ROOT}/movies/${filmID}`)
     .then((response) => response.json())
     .then((filmData) => {
       if (callback) {
         callback(filmData);
       }
     });
+};
+
+export const deleteFilmByID = (filmID, callback) => {
+  fetch(`http://localhost:4000/movies/${filmID}`, {
+    method: "DELETE",
+  }).then((response) => {
+    if (response.ok) {
+      if (callback) {
+        callback();
+      }
+    }
+  });
 };
 
 export const sendFilmData = (values, id, successCallback) => {

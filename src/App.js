@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { HashRouter, Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { FilmList } from "./components/FilmList";
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
@@ -10,13 +10,12 @@ import { NotFoundPage } from "./components/NotFoundPage";
 import { ErrorBoundary } from "./components/ErrorBoundary";
 import { ModalManager } from "./components/ModalManager";
 import { ModalManagerProvider } from "./context/ModalManagerContext";
-import { store } from "./store";
 import { SITE_NAME } from "./Constants";
 import "./App.sass";
 
-const App = () => {
+const App = ({ Router, location, context, store }) => {
   return (
-    <HashRouter>
+    <Router location={location} context={context}>
       <Provider store={store}>
         <ModalManagerProvider>
           <Header title={SITE_NAME} />
@@ -43,7 +42,7 @@ const App = () => {
           <ModalManager />
         </ModalManagerProvider>
       </Provider>
-    </HashRouter>
+    </Router>
   );
 };
 

@@ -4,10 +4,13 @@ import { ImageFallback } from "../ImageFallback";
 import { minutesToHoursAndMinutes } from "../../Heplers";
 import filmCardPlaceholder from "../../assets/images/placeholder_netflix.jpg";
 import { fetchFilmByID } from "../../api";
+import { useServerSideContext } from "../../context/ServerSideContext";
 import "./FilmInfo.sass";
 
 export const FilmInfo = ({ id }) => {
-  const [film, setFilm] = useState(null);
+  const serverSideProps = useServerSideContext();
+
+  const [film, setFilm] = useState(serverSideProps?.selectedFilm || null);
 
   const scrollToTop = () => {
     window.scroll({ top: 0, left: 0, behavior: "smooth" });
@@ -20,8 +23,10 @@ export const FilmInfo = ({ id }) => {
   };
 
   useEffect(() => {
-    getFilm(id);
-    scrollToTop();
+    if (id) {
+      getFilm(id);
+      scrollToTop();
+    }
   }, [id]);
 
   const filmDate = film?.release_date;
@@ -68,5 +73,9 @@ export const FilmInfo = ({ id }) => {
 };
 
 FilmInfo.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.number,
+};
+
+FilmInfo.defaultProps = {
+  id: null,
 };

@@ -6,7 +6,7 @@ import { useModalManagerActionContext } from "../../context/ModalManagerContext"
 import { fetchFilms } from "../../action/films";
 import { FETCH_FILMS_COUNT } from "../../Constants";
 import { Button } from "../Button";
-import { sendFilmData } from "../../api";
+import { sendFilmData, deleteFilmByID } from "../../api";
 
 const mapStateToProps = (store) => ({
   filmsList: store.films.list,
@@ -40,9 +40,7 @@ export const FilmList = connect(
   };
 
   const deleteMovieAndRefetch = (id) => {
-    fetch(`http://localhost:4000/movies/${id}`, {
-      method: "DELETE",
-    }).then(() => {
+    deleteFilmByID(id, () => {
       fetchFilmsInStore(FETCH_FILMS_COUNT, location, searchQuery);
     });
   };
@@ -77,17 +75,15 @@ export const FilmList = connect(
 
   const count = filmsList ? filmsList.length : 0;
 
-  const setSelectedFilm = (id) => {
-    query.set("movie", id);
-    history.replace({ search: query.toString() });
-  };
-
   const clearSearch = () => {
     history.replace({
       pathname: "/search",
       search: query.toString(),
     });
   };
+
+  query.delete("movie");
+  const queryWithourMovie = query.toString();
 
   return (
     <>
@@ -106,7 +102,9 @@ export const FilmList = connect(
                 thumbnail={item.poster_path}
                 releaseDate={item.release_date}
                 actions={filmCardActions}
-                onClick={setSelectedFilm}
+                link={`${location.pathname}?${queryWithourMovie}${
+                  queryWithourMovie ? "&" : ""
+                }movie=${item.id}`}
               />
             </div>
           ))}

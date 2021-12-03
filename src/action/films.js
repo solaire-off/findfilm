@@ -1,6 +1,7 @@
 import { DEFAULT_SORT_FIELD } from "../Constants";
 import { SET_FILMS } from "./action-types";
 import { API_ROOT } from "../Constants";
+import fetch from "isomorphic-fetch";
 
 export const setFilms = (list) => ({
   type: SET_FILMS,
@@ -20,7 +21,7 @@ export const fetchFilms = (count, location, searchQuery) => {
     if (searchQuery) {
       url += `&search=${searchQuery}&searchBy=title`;
     }
-    fetch(url)
+    return fetch(url)
       .then((response) => response.json())
       .then((list) => dispatch(setFilms(list.data)));
   };

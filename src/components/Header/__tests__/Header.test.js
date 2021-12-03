@@ -6,15 +6,6 @@ import { SITE_NAME } from "../../../Constants";
 import { MemoryRouter } from "react-router-dom";
 import { ModalManagerActionContext } from "../../../context/ModalManagerContext";
 
-const mockHistoryReplace = jest.fn();
-
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useHistory: () => ({
-    replace: mockHistoryReplace,
-  }),
-}));
-
 it("Current render default header", async () => {
   await act(async () => {
     render(
@@ -77,5 +68,5 @@ it("Change search params in history for close info about film", async () => {
 
   userEvent.click(screen.getByLabelText(/close film info/i));
 
-  expect(mockHistoryReplace).toBeCalledTimes(1);
+  expect(screen.getByText("+ Add Movie")).toBeInTheDocument();
 });

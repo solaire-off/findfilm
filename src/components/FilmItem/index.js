@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FilmItemMenu } from "../FilmItemMenu";
 import { ImageFallback } from "../ImageFallback";
+import { Link } from "react-router-dom";
 
 import "./FilmItem.sass";
 
@@ -16,7 +17,7 @@ export const FilmItem = ({
   releaseDate,
   thumbnail,
   actions,
-  onClick,
+  link,
 }) => {
   const genresCaption = genres.join(", ");
   const releaseDateObject = new Date(releaseDate);
@@ -24,7 +25,7 @@ export const FilmItem = ({
   return (
     <div className="film-card">
       {actions && <FilmItemMenu id={id} actions={actions} />}
-      <div onClick={() => onClick(id)} className="film-card__in">
+      <Link to={link} className="film-card__in">
         <ImageFallback
           className="film-card__thumbnail"
           src={thumbnail}
@@ -36,7 +37,7 @@ export const FilmItem = ({
           {releaseDate && <p className="film-card__timestamp">{releaseYear}</p>}
         </div>
         <p className="film-card__meta">{genresCaption}</p>
-      </div>
+      </Link>
     </div>
   );
 };
@@ -53,7 +54,7 @@ FilmItem.propTypes = {
       callback: PropTypes.func.isRequired,
     })
   ),
-  onClick: PropTypes.func.isRequired,
+  link: PropTypes.string.isRequired,
 };
 
 FilmItem.defaultProps = {
